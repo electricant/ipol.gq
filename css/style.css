@@ -137,6 +137,9 @@ body {
 	.headerdata {
 		width: 90%;
 	}
+	.content {
+		width: 90%;
+	}
 }
 @media (max-width: 500px) {
 	.header {

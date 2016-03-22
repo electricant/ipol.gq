@@ -23,5 +23,8 @@ written in [lisp](http://lispers.org/) using the
 into HTML on the fly by the backend. Javascript is the duct tape that keeps
 static and dynamic content together.
 
-You may ask why roll your own solution when there's plenty of blogging
-solutions and the answer is because I can.
+You may ask: «Why roll your own solution when there's plenty of blogging
+solutions?». The answer is because I can.
+<p>
+      <img src="img/made-with-lisp-logo.jpg" width="300" height="100"/>
+</p>

@@ -48,7 +48,7 @@ body {
 	text-decoration: none;
 	text-shadow: 1px 1px rgba(0, 0, 0, 0.15);
 	border-bottom: 1px solid rgba(242, 241, 239, 0);
-	transition: border 300ms ease; 
+	transition: border 300ms ease;
 }
 .navbar a:hover {
 	border-bottom: 1px solid rgba(242, 241, 239, 1);
@@ -96,9 +96,9 @@ body {
 	border-radius: 75px;
 	-webkit-box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.8);
 	-moz-box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.8);
-	box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.8); 
+	box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.8);
 	float: left;
-	background: url(/img/photo.jpg) no-repeat;
+	background: url(/images/photo.jpg) no-repeat;
 	background-color: #F2F1EF;
 }
 .title {

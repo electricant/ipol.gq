@@ -2,7 +2,7 @@
 
 Paragraphs are separated by a blank line.
 
-2nd paragraph. *Italic*, **bold**, and `monospace`. 
+2nd paragraph. *Italic*, **bold**, and `monospace`.
 \*this text is surrounded by literal asterisks\*
 
 Itemized lists look like:
@@ -80,7 +80,7 @@ Now a nested list:
 Notice again how text always lines up on 4-space indents (including
 that last line which continues item 3 above).
 
-Here's a link to [a website](http://foo.bar), to a [local doc](local-doc.html), 
+Here's a link to [a website](http://foo.bar), to a [local doc](local-doc.html),
 and to a [section heading in the current doc](#h2_header).
 Here's a footnote [^1][].
 
@@ -92,7 +92,7 @@ A horizontal rule follows.
 
 and images can be specified like so:
 
-![example image](/img/photo.png "An exemplary image")
+![example image](/images/photo.jpg "An exemplary image")
 
 Note that you can backslash-escape any punctuation characters
 which you wish to be displayed literally, ex.: \`foo\`, \*bar\*, etc.

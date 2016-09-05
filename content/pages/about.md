@@ -26,5 +26,5 @@ static and dynamic content together.
 You may ask: "Why roll your own solution when there's plenty of blogging
 solutions?". The answer is because I can.
 <p>
-      <img src="img/made-with-lisp-logo.jpg" width="300" height="100"/>
+      <img src="images/made-with-lisp-logo.jpg" width="300" height="100"/>
 </p>

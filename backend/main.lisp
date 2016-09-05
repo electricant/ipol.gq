@@ -3,7 +3,8 @@
 (ql:quickload "hunchentoot")
 (ql:quickload "flexi-streams")
 
-; Load configuration file
+; Load configuration file (beware to run this script from the folder it is
+; located into)
 (load "config.lisp")
 
 ;;-------------;;

@@ -3,21 +3,8 @@
 (ql:quickload "hunchentoot")
 (ql:quickload "flexi-streams")
 
-; Global variables
-;------------------
-; Directory where the content is stored, with trailing /
-(defparameter *content-dir* "/home/pol/websites/ipol.gq/content/")
-
-; Number of components to strip from the path of the request
-(defparameter *strip-level* 2)
-
-; Put a value different from "/" here if this program is run within a sub path
-; of the domain
-(defparameter *URL-root* "/artsrv")
-
-; Subdirectory within *content-dir* where the articles are stored.
-; Used to build a list with the most recent articles
-(defparameter *articles-dir* "articles/")
+; Load configuration file
+(load "config.lisp")
 
 ;;-------------;;
 ;;  Functions  ;;
@@ -89,7 +76,7 @@
 	(render-file (concatenate 'string *content-dir* "index.md")))
 
 ; All other pages are sent through a 404 handler
-(defmethod hunchentoot:acceptor-status-message 
+(defmethod hunchentoot:acceptor-status-message
 	(acceptor (http-status-code (eql 404)) &key)
 	(let ((uri (strip-path (hunchentoot:request-uri hunchentoot:*request*)
 		*strip-level*))

@@ -11,7 +11,7 @@ context about it.
 * [How to interpret complex C/C++ declarations](http://www.codeproject.com/Articles/7042/How-to-interpret-complex-C-C-declarations)<br/>
 	Useful guide for reading C/C++ code.
 
-* [If correlation doesn’t imply causation, then what does?](http://www.michaelnielsen.org/ddi/if-correlation-doesnt-imply-causation-then-what-does)
+* [If correlation doesn't imply causation, then what does?](http://www.michaelnielsen.org/ddi/if-correlation-doesnt-imply-causation-then-what-does)
 	<br/>Some theory about the difference between correlation and causation.
 	Insightful.
 

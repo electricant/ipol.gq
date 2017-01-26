@@ -1,2 +1,4 @@
 # ignore local config file
 config.lisp
+# vim swap files
+*.swp

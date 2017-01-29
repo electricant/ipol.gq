@@ -1,4 +1,6 @@
-# ignore local config file
-config.lisp
 # vim swap files
 *.swp
+
+# generated stuff
+website/*.html
+website/articles/*.html

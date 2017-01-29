@@ -24,7 +24,6 @@
 
 ;;; Load required packages
 (ql:quickload "cl-markdown")
-(ql:quickload "flexi-streams")
 
 ;;;
 ;;; Global configuration variables
@@ -39,8 +38,8 @@
 ;;; Drectory containing the articles to be compiled and their extension
 (defparameter *articles-dir* "content/articles/*.md")
 
-;;; Character encoding to be used (has to be an external-format object)
-(defparameter *char-enc* (flexi-streams:make-external-format :utf-8))
+;;; Character encoding to be used when reading and writing files
+(defparameter *char-enc* :utf-8)
 
 ;;;
 ;;; Various functions and code
@@ -54,9 +53,17 @@
   	  (cl-markdown:render-to-stream (cl-markdown:markdown data :stream nil)
   	  								:html nil))))
 
-;;; Return a new stream with the encoding set by *char-enc*
-(defun set-encoding (strm)
-  (flexi-streams:make-flexi-stream strm	:external-format *char-enc*))
+(defun render-header ()
+  (with-open-file (in "theme/header.html")
+  	(let ((data (make-string (file-length in))))
+  	  (read-sequence data in)
+  	  data)))
+
+(defun render-footer ()
+    (with-open-file (in "theme/footer.html")
+          (let ((data (make-string (file-length in))))
+          	      (read-sequence data in)
+          	            data)))
 
 ;;; Scan the sources directories and build a list of paths as strings
 (defun get-sources ()
@@ -77,9 +84,18 @@
 
 ;;; Build an association list containing the path of each file and its
 ;;; destination file where the compiled result will be stored
-(defun build-file-alist ()
+(defun sources-alist ()
   (pairlis (get-sources) (get-destinations)))
+
+;;; Compile the provided source and put the result in dest
+(defun build-file (source dest)
+  (let ((ostream (open dest :direction :output
+  					   :if-exists :overwrite
+  					   :if-does-not-exist :create
+  					   :external-format *char-enc*)))
+  	(format ostream "~a~&~a~&~a" (render-header) (render-file source) (render-footer))
+  	(close ostream)))
 
 ;;; Make the website using the functions above
 (defun make-website ()
-  nil)
+  (mapc #'(lambda(fl) (build-file (car fl) (cdr fl))) (sources-alist)))

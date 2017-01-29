@@ -90,7 +90,7 @@
 ;;; Compile the provided source and put the result in dest
 (defun build-file (source dest)
   (let ((ostream (open dest :direction :output
-  					   :if-exists :overwrite
+  					   :if-exists :supersede
   					   :if-does-not-exist :create
   					   :external-format *char-enc*)))
   	(format ostream "~a~&~a~&~a" (render-header) (render-file source) (render-footer))

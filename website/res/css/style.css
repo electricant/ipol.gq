@@ -68,14 +68,13 @@ body {
 }
 .text {
 	line-height: 1.5;
-	width: 35em;
-	float: left;
-	padding-left: 2em;
-	padding-right: 2em;
-	margin-right: 0;
+	padding: 2em;
 }
 .text h1 {
 	margin-top: 0.5em;
+}
+.text p {
+	margin: 0;
 }
 .recent {
 	float: right;
@@ -91,14 +90,13 @@ body {
 	padding-left: 1.25em;
 }
 .circlephoto{
-	width: 150px;
-	height: 150px;
-	border-radius: 75px;
-	-webkit-box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.8);
-	-moz-box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.8);
-	box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.8);
-	float: left;
-	background: url(/res/img/photo.jpg) no-repeat;
+	--circle-radius: 200px;
+	width: var(--circle-radius);
+	height: var(--circle-radius);
+	border-radius: calc(var(--circle-radius) / 2);
+	margin: auto auto 2em;
+	box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.5);
+	background: url(/res/img/photo-200.jpg) no-repeat;
 	background-color: #F2F1EF;
 }
 .title {

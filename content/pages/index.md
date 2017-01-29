@@ -1,23 +1,20 @@
-# Home page index
+<div class="circlephoto"></div>
+<center>
+Hi! I'm Paolo and this is my home page.
+</center>
+<br>
+I am a Ph.D. student at the Department of Information Engineering, University of
+Padova.
 
-Hi! This is my home page.
+I love creating stuff and I like to think as myself as a craftsman.
 
-## Lorem Ipsum
+My motto is: <br>*"If you want a job well done you have to do it yourself"*.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-volutpat diam eu fringilla pellentesque. Vestibulum eget mi vestibulum,
-aliquam est vitae, fringilla lectus. Etiam orci massa, varius nec
-laoreet nec, scelerisque eleifend enim. Morbi mollis eget diam quis
-dictum. Aliquam feugiat placerat elit quis faucibus. Mauris nisi diam,
-volutpat a dui sed, mattis fringilla odio. Ut sem diam, suscipit a
-tortor vel, consectetur luctus neque. Fusce purus risus, consectetur
-nec sem quis, maximus pellentesque nisl. Integer malesuada, risus ut
-aliquet luctus, lacus neque ornare ligula, at tempor libero sapien et
-lectus. Nam id diam sed lacus luctus varius. Ut fermentum nisi non leo
-blandit, sit amet eleifend velit porta. Aenean vehicula sagittis leo sed mattis.
+I've been interested in electronics since my childhood. During the years I've
+also been attracted by computer science, programming and technology in general.
 
-Nunc at pharetra ante, sit amet ornare risus. Praesent dictum lacus ligula.
-Donec magna enim, ultrices id sapien et, ullamcorper pharetra dui. Nulla ut
-dapibus libero. Nunc ut dolor nibh. Suspendisse vel tristique purus, vel
-tincidunt sem. Quisque vitae tellus maximus, tristique eros id, rhoncus orci.
-Nunc posuere erat sed mi pellentesque, eget molestie neque lobortis.
+## Contacts and Stuff
+
+ * e-mail: [contactme@ipol.gq](mailto:contactme@ipol.gq)
+ * [github](https://github.com/electricant)
+ * [bitbucket](https://bitbucket.org/paolo_scr).

@@ -22,8 +22,9 @@
 ;;;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;;;
 
-;;; Load required packages
-(ql:quickload "cl-markdown")
+;;; Load required packages. Adjust quicklisp location if needed
+(load "~/.quicklisp/setup.lisp")
+(ql:quickload "cl-markdown" :silent T)
 
 ;;;
 ;;; Global configuration variables

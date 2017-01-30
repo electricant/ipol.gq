@@ -1,6 +1,6 @@
 # About this Website
 
-This website is made up by a static pages served by
+This website is made up by a set of static pages served by
 [lighttpd](https://www.lighttpd.net/).
 
 It used to have a backend written in [lisp](http://lispers.org/) using the
@@ -13,7 +13,7 @@ backend into a static website generator. So here it is: a fast static website
 that works without javascript.
 
 You may ask: "Why roll your own solution when there's plenty of blogging
-solutions?". The answer is because I can.
-<p>
-      <img src="/res/img/made-with-lisp-logo.jpg" width="300" height="100"/>
-</p>
+platform and static site generators?". The answer is because I can.
+<center>
+	<img src="/res/img/made-with-lisp-logo.jpg" width="300" height="100"/>
+</center>

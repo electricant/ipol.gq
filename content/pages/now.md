@@ -2,10 +2,10 @@
 
 This is a list of things I'm up to now:
 
-* Learning functional programming and AI
+* Learning functional programming and AI (this may take a long time)
 * Create things both hardware and software
 * Blog about things I create and about interesting stuff
-* Finishing my last year at university hoping to get a PhD afterwards
+* The Ph.D. which is taking up most of my time
 * I'm really into swimming and scuba diving.
 * I love tasting craft beers (expecially english ales).
 

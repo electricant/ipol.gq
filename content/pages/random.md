@@ -19,8 +19,7 @@ context about it.
 * [The Top F2P Monetization Tricks](http://www.gamasutra.com/blogs/RaminShokrizade/20130626/194933/The_Top_F2P_Monetization_Tricks.php)<br/>
 	How free to play (F2P) games trick people into spending money.
 
-* [Boredom is not a problem to be solved. It's the last privilege of a free mind]
-(https://www.theguardian.com/commentisfree/2015/sep/28/boredom-cures-privilege-free-mind)
+* [Boredom is not a problem to be solved. It's the last privilege of a free mind](https://www.theguardian.com/commentisfree/2015/sep/28/boredom-cures-privilege-free-mind)
 
 * [The demoralized mind](https://newint.org/columns/essays/2016/04/01/psycho-spiritual-crisis/)<br/>
 	Essay about how our consumerism culture relates to depression and
@@ -53,5 +52,5 @@ context about it.
 * [On open-sourcing libraries](http://williamdurand.fr/2013/07/04/on-open-sourcing-libraries/)<br/>
 	Same as above.
 
-* [Algorithmic Composition: A Gentle Introduction to Music Composition Using Common LISP and Common Music](http://quod.lib.umich.edu/s/spobooks/bbv9810.0001.001)
+* [Algorithmic Composition: A Gentle Introduction to Music Composition Using Common LISP and Common Music](http://quod.lib.umich.edu/s/spobooks/bbv9810.0001.001)<br/>
 	A book on common lisp and music. The best combo you can get!

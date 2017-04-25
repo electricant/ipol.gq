@@ -4,17 +4,17 @@ This page contains some links to interesting things I found while surfing the
 net. I try to add a small comment after each link in order to provide some
 context about it.
 
-* [The Absurd Primacy of the Automobile in American Life](http://www.theatlantic.com/business/archive/2016/04/absurd-primacy-of-the-car-in-american-life/476346/?single_page=true)
-	"If the price of gasoline and the vehicles that burn it actually reflected the true costs and damage they inflict, the common car would go extinct. Gasoline would cost way more than $10 a gallon."
+* [The Absurd Primacy of the Automobile in American Life](http://www.theatlantic.com/business/archive/2016/04/absurd-primacy-of-the-car-in-american-life/476346/?single_page=true)<br/>
+	"If the price of gasoline and the vehicles that burn it actually reflected
+	the true costs and damage they inflict, the common car would go extinct.
+	Gasoline would cost way more than $10 a gallon."
 
 * [Drowning Doesn’t Look Like Drowning](http://mariovittone.com/2010/05/154/)
-	People drowning don't behave like in the movies.
+	<br/>People drowning don't behave like in the movies.
 
 * [If correlation doesn't imply causation, then what does?](http://www.michaelnielsen.org/ddi/if-correlation-doesnt-imply-causation-then-what-does)
 	<br/>Some theory about the difference between correlation and causation.
 	Insightful.
-
-* [A Guide to Bayesian Statistics](https://www.countbayesie.com/blog/2016/5/1/a-guide-to-bayesian-statistics)
 
 * [The Top F2P Monetization Tricks](http://www.gamasutra.com/blogs/RaminShokrizade/20130626/194933/The_Top_F2P_Monetization_Tricks.php)<br/>
 	How free to play (F2P) games trick people into spending money.
@@ -30,6 +30,10 @@ context about it.
 
 * [Why time management is ruining our lives](https://www.theguardian.com/technology/2016/dec/22/why-time-management-is-ruining-our-lives)
 
+* [Like start-ups, most intentional communities fail – why? | Aeon Essays](https://aeon.co/essays/like-start-ups-most-intentional-communities-fail-why)
+	<br>A great essay highlighting difficulties most intentional communities
+	fail. All in all *"communities are just fractals of society"*.
+
 ## Various Guides and Books
 
 * [19 Tips For Everyday Git Use](https://www.alexkras.com/19-git-tips-for-everyday-use/)
@@ -43,8 +47,9 @@ context about it.
 * [How to interpret complex C/C++ declarations](http://www.codeproject.com/Articles/7042/How-to-interpret-complex-C-C-declarations)<br/>
 	Useful guide for reading C/C++ code.
 
-* [Game Programming Patterns](http://gameprogrammingpatterns.com)<br/>
-	The title speaks by himself.
+* [Game Programming Patterns](http://gameprogrammingpatterns.com)
+
+* [A Guide to Bayesian Statistics](https://www.countbayesie.com/blog/2016/5/1/a-guide-to-bayesian-statistics)
 
 * [Using imagemagik to make sharp web-sized photographs](https://even.li/imagemagick-sharp-web-sized-photographs/)<br/>
 	You may never know when this may become useful.
@@ -54,3 +59,5 @@ context about it.
 
 * [Algorithmic Composition: A Gentle Introduction to Music Composition Using Common LISP and Common Music](http://quod.lib.umich.edu/s/spobooks/bbv9810.0001.001)<br/>
 	A book on common lisp and music. The best combo you can get!
+
+* [Digitizing analog circuits containing op amps using Wave Digital Filters](http://obogason.com/emulating-op-amp-circuits-using-wdf-theory/)

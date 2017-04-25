@@ -1,5 +1,9 @@
 # Articles by Date
 
+### April 2017
+
+* [Linux VMs with qemu](/articles/qemu_linux.html)
+
 ### March 2017
 
 * [LaTeX Templates](/articles/latex_templates.html)

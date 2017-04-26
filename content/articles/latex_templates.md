@@ -96,5 +96,5 @@ same as the first one.
 Download the theme from
 [my github repo](https://github.com/electricant/beamerThemePadovaDEI) and
 install it or put the files in the same directory as your presentation. Then use
-it with `\usetheme{PadovaDEI}`.
+it with `\usetheme\{PadovaDEI\}`.
 

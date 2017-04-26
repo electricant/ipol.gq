@@ -79,7 +79,7 @@ something similar in other distros as well. Search your package manager.
 
 	\end{document}
 
-Refer to [](http://www.texdoc.net/texmf-dist/doc/latex/IEEEtran/IEEEtran_HOWTO.pdf) for more details.
+Refer to [http://www.texdoc.net/texmf-dist/doc/latex/IEEEtran/IEEEtran_HOWTO.pdf](http://www.texdoc.net/texmf-dist/doc/latex/IEEEtran/IEEEtran_HOWTO.pdf) for more details.
 
 ## Custom University of Padova Theme
 

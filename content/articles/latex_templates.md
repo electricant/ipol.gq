@@ -51,15 +51,50 @@ Now some boilerplate code for a presentation:
 
 Also some code for an article:
 
-	TODO
+**NOTE:** This code requires the IEEEtran document class which can be downloaded
+from [here](http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/).
+On debian-based GNU/linux systems IEEEtran and some other useful packages can be
+installed with `sudo apt-get install texlive-publishers`. There ought to be
+something similar in other distros as well. Search your package manager.
+
+	\documentclass[journal, a4paper, 12pt]{IEEEtran}
+
+	\title{The title}
+	\author{The author}
+	\markboth{Journal of Something}{Author name and paper title}
+
+	\begin{document}
+
+	\maketitle
+
+	\begin{abstract}
+		abstract
+	\end{abstract}
+
+	\begin{IEEEkeywords}
+		keyword1, keyword2, ...
+	\end{IEEEkeywords}
+
+	% Sections and subsections as usual
+
+	\end{document}
+
+Refer to [](http://www.texdoc.net/texmf-dist/doc/latex/IEEEtran/IEEEtran_HOWTO.pdf) for more details.
 
 ## Custom University of Padova Theme
 
-During my PhD at the University of Padova I often need some theme for a
-presentation.
+During my PhD at the University of Padova (Department of Information
+Engineering) I often need some theme for a presentation.
 
 A good one can be found
 [here](https://andrea.burattin.net/stuff/tema-latex-beamer-padova/).
-I used this theme as a starting point to create my own variation.
+I used this theme as a starting point to create my own variation, adding the
+depatment logo and modifying the style a bit. Best results can be obtained using
+the presentation template above. The theme assumes that the last frame is the
+same as the first one.
 
-	TODO
+Download the theme from
+[my github repo](https://github.com/electricant/beamerThemePadovaDEI) and
+install it or put the files in the same directory as your presentation. Then use
+it with `\usetheme{PadovaDEI}`.
+

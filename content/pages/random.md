@@ -34,6 +34,11 @@ context about it.
 	<br>A great essay highlighting difficulties most intentional communities
 	fail. All in all *"communities are just fractals of society"*.
 
+* [Better Than Free](http://kk.org/thetechnium/better-than-fre) <br>
+	Article by Kevin Kelly. It points out how the internet is a copy machine
+	that has made many things worthless and for what the people is still willing
+	to pay.
+
 ## Various Guides and Books
 
 * [19 Tips For Everyday Git Use](https://www.alexkras.com/19-git-tips-for-everyday-use/)

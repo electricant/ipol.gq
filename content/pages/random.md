@@ -39,6 +39,10 @@ context about it.
 	that has made many things worthless and for what the people is still willing
 	to pay.
 
+* [How totalism works](https://aeon.co/essays/how-cult-leaders-brainwash-followers-for-total-control) <br>
+	"The brainwashing methods of isolation, engulfment and fear can lead anyone
+	 to a cult."
+
 ## Various Guides and Books
 
 * [19 Tips For Everyday Git Use](https://www.alexkras.com/19-git-tips-for-everyday-use/)

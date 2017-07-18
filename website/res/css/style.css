@@ -86,13 +86,13 @@ body {
 	margin: 0.5em 0 0.5em 0;
 }
 .circlephoto{
-	--diameter: 200px;
+	--diameter: 220px;
 	width: var(--diameter);
 	height: var(--diameter);
 	border-radius: calc(var(--diameter) / 2);
-	margin: 2em auto 2em;
+	margin: 1em auto 2em;
 	box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.5);
-	background: url(/res/img/photo-200.jpg) no-repeat;
+	background: url(/res/img/photo-220.jpg) no-repeat;
 	background-color: #F2F1EF;
 }
 /* responsive layout */

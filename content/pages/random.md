@@ -81,3 +81,9 @@ context about it.
 	A book on common lisp and music. The best combo you can get!
 
 * [Digitizing analog circuits containing op amps using Wave Digital Filters](http://obogason.com/emulating-op-amp-circuits-using-wdf-theory/)
+
+* [Hostnames!](http://seriss.com/people/erco/unixtools/hostnames.html)
+	A source of inspiration for computer hostnames
+
+* [Bit Twiddling Hacks](http://graphics.stanford.edu/~seander/bithacks.html)
+	List of code snippets for clever bit operations

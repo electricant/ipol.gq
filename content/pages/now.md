@@ -2,7 +2,6 @@
 
 This is a list of things I'm up to now:
 
-* Learning functional programming and AI (this may take a long time)
 * Create things both hardware and software
 * Blog about things I create and about interesting stuff
 * The Ph.D. which is taking up most of my time

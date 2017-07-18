@@ -43,6 +43,17 @@ context about it.
 	"The brainwashing methods of isolation, engulfment and fear can lead anyone
 	 to a cult."
 
+* [Neoliberalism has conned us into fighting climate change as individuals](https://www.theguardian.com/environment/true-north/2017/jul/17/neoliberalism-has-conned-us-into-fighting-climate-change-as-individuals) <br>
+	"This is the con-job of neoliberalism: to persuade us to address climate
+	 change through our pocket-books, rather than through power and politics."
+	<br>
+	Also on the same line:
+	[Conscious consumerism is a lie. Here’s a better way to help save the world](https://qz.com/920561/conscious-consumerism-is-a-lie-heres-a-better-way-to-help-save-the-world/)
+
+* [Law in the Jungle](https://aeon.co/essays/the-subalterns-are-speaking-whos-listening)
+	 Essay on the Jungle refugee camp in Calais. The article deals with how
+	 became its own society and what this meant.
+
 ## Various Guides and Books
 
 * [19 Tips For Everyday Git Use](https://www.alexkras.com/19-git-tips-for-everyday-use/)

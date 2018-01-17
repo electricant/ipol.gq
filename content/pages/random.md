@@ -4,11 +4,6 @@ This page contains some links to interesting things I found while surfing the
 net. I try to add a small comment after each link in order to provide some
 context about it.
 
-* [The Absurd Primacy of the Automobile in American Life](http://www.theatlantic.com/business/archive/2016/04/absurd-primacy-of-the-car-in-american-life/476346/?single_page=true)<br/>
-	"If the price of gasoline and the vehicles that burn it actually reflected
-	the true costs and damage they inflict, the common car would go extinct.
-	Gasoline would cost way more than $10 a gallon."
-
 * [Drowning Doesn’t Look Like Drowning](http://mariovittone.com/2010/05/154/)
 	<br/>People drowning don't behave like in the movies.
 
@@ -50,9 +45,23 @@ context about it.
 	Also on the same line:
 	[Conscious consumerism is a lie. Here’s a better way to help save the world](https://qz.com/920561/conscious-consumerism-is-a-lie-heres-a-better-way-to-help-save-the-world/)
 
-* [Law in the Jungle](https://aeon.co/essays/the-subalterns-are-speaking-whos-listening)
+* [Law in the Jungle](https://aeon.co/essays/the-subalterns-are-speaking-whos-listening) <br>
 	 Essay on the Jungle refugee camp in Calais. The article deals with how
 	 became its own society and what this meant.
+
+### Car and traffic related
+
+It seems as if I quite dislike the idea of being forced to own a car.
+This is a list of articles on such topic.
+
+* [What happens if you turn off the traffic lights?](https://www.theguardian.com/environment/bike-blog/2017/sep/22/what-happens-if-you-turn-off-the-traffic-lights)
+
+* [The forgotten history of how automakers invented the crime of "jaywalking"](https://www.vox.com/2015/1/15/7551873/jaywalking-history)
+
+* [The Absurd Primacy of the Automobile in American Life](http://www.theatlantic.com/business/archive/2016/04/absurd-primacy-of-the-car-in-american-life/476346/?single_page=true)<br/>
+	"If the price of gasoline and the vehicles that burn it actually reflected
+	the true costs and damage they inflict, the common car would go extinct.
+	Gasoline would cost way more than $10 a gallon."
 
 ## Various Guides and Books
 
@@ -64,26 +73,27 @@ context about it.
 	Everything you need to know in order to use the GNU Privacy Guard encryption
 	software (GPG) to protect your privacy.
 
-* [How to interpret complex C/C++ declarations](http://www.codeproject.com/Articles/7042/How-to-interpret-complex-C-C-declarations)<br/>
-	Useful guide for reading C/C++ code.
-
-* [Game Programming Patterns](http://gameprogrammingpatterns.com)
-
 * [A Guide to Bayesian Statistics](https://www.countbayesie.com/blog/2016/5/1/a-guide-to-bayesian-statistics)
 
 * [Using imagemagik to make sharp web-sized photographs](https://even.li/imagemagick-sharp-web-sized-photographs/)<br/>
-	You may never know when this may become useful.
-
-* [On open-sourcing libraries](http://williamdurand.fr/2013/07/04/on-open-sourcing-libraries/)<br/>
-	Same as above.
-
-* [Algorithmic Composition: A Gentle Introduction to Music Composition Using Common LISP and Common Music](http://quod.lib.umich.edu/s/spobooks/bbv9810.0001.001)<br/>
-	A book on common lisp and music. The best combo you can get!
+	You may never know when this may be useful.
 
 * [Digitizing analog circuits containing op amps using Wave Digital Filters](http://obogason.com/emulating-op-amp-circuits-using-wdf-theory/)
 
 * [Hostnames!](http://seriss.com/people/erco/unixtools/hostnames.html)
 	A source of inspiration for computer hostnames
+
+### Programming
+
+* [How to interpret complex C/C++ declarations](http://www.codeproject.com/Articles/7042/How-to-interpret-complex-C-C-declarations)<br/>
+	Useful guide for reading C/C++ code.
+
+* [Game Programming Patterns](http://gameprogrammingpatterns.com)
+
+* [On open-sourcing libraries](http://williamdurand.fr/2013/07/04/on-open-sourcing-libraries/)<br/>
+
+* [Algorithmic Composition: A Gentle Introduction to Music Composition Using Common LISP and Common Music](http://quod.lib.umich.edu/s/spobooks/bbv9810.0001.001)<br/>
+	A book on common lisp and music. The best combo you can get!
 
 * [Bit Twiddling Hacks](http://graphics.stanford.edu/~seander/bithacks.html)
 	List of code snippets for clever bit operations

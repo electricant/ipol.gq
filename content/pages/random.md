@@ -49,6 +49,29 @@ context about it.
 	 Essay on the Jungle refugee camp in Calais. The article deals with how
 	 became its own society and what this meant.
 
+* [Teaching ‘grit’ is bad for children, and bad for democracy](https://aeon.co/ideas/teaching-grit-is-bad-for-children-and-bad-for-democracy) <br>
+	Apparently grit does more harm than good. The author explains *"how a grit
+	culture contributes to an authoritarian politics, one where leaders expect
+	the masses to stay on task."*
+
+* [Return of the city-state](https://aeon.co/essays/the-end-of-a-world-of-nation-states-may-be-upon-us) <br>
+	*"This is the crux of the problem: nation-states rely on control. If they
+	can’t control information, crime, businesses, borders or the money supply,
+	then they will cease to deliver what citizens demand of them. In the end,
+	nation-states are nothing but agreed-upon myths: we give up certain freedoms
+	in order to secure others. But if that transaction no longer works, and we
+	stop agreeing on the myth, it ceases to have power over us."*
+
+* [Medieval Peasants Got a Lot More Vacation Time Than You](https://nypost.com/2013/09/04/medieval-peasants-got-a-lot-more-vacation-time-than-you-economist/)
+
+* [Having children is not life-affirming: it’s immoral](https://aeon.co/essays/having-children-is-not-life-affirming-its-immoral)
+
+* [Universal Basic Income is a neoliberal plot to make you poorer](https://www.opendemocracy.net/neweconomics/universal-basic-income-is-a-neoliberal-plot-to-make-you-poorer/) <br>
+	*"A closer look at how UBI is expected to work reveals that it is intended to provide political cover for the elimination of social programs and the privatization of social services"*
+
+* [The good guy/bad guy myth](https://aeon.co/essays/why-is-pop-culture-obsessed-with-battles-between-good-and-evil) <br>
+	*"Good guy/bad guy narratives might not possess any moral sophistication, but they do promote social stability, and they’re useful for getting people to sign up for armies and fight in wars with other nations. Their values feel like morality, and the association with folklore and mythology lends them a patina of legitimacy, but still, they don’t arise from a moral vision. They are rooted instead in a political vision, which is why they don’t help us deliberate, or think more deeply about the meanings of our actions."*
+
 ### Car and traffic related
 
 It seems as if I quite dislike the idea of being forced to own a car.
@@ -80,7 +103,7 @@ This is a list of articles on such topic.
 
 * [Digitizing analog circuits containing op amps using Wave Digital Filters](http://obogason.com/emulating-op-amp-circuits-using-wdf-theory/)
 
-* [Hostnames!](http://seriss.com/people/erco/unixtools/hostnames.html)
+* [Hostnames!](http://seriss.com/people/erco/unixtools/hostnames.html) <br>
 	A source of inspiration for computer hostnames
 
 ### Programming
@@ -95,5 +118,5 @@ This is a list of articles on such topic.
 * [Algorithmic Composition: A Gentle Introduction to Music Composition Using Common LISP and Common Music](http://quod.lib.umich.edu/s/spobooks/bbv9810.0001.001)<br/>
 	A book on common lisp and music. The best combo you can get!
 
-* [Bit Twiddling Hacks](http://graphics.stanford.edu/~seander/bithacks.html)
+* [Bit Twiddling Hacks](http://graphics.stanford.edu/~seander/bithacks.html) <br>
 	List of code snippets for clever bit operations

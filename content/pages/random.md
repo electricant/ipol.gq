@@ -35,12 +35,12 @@ context about it.
 	to pay.
 
 * [How totalism works](https://aeon.co/essays/how-cult-leaders-brainwash-followers-for-total-control) <br>
-	"The brainwashing methods of isolation, engulfment and fear can lead anyone
-	 to a cult."
+	*"The brainwashing methods of isolation, engulfment and fear can lead anyone
+	 to a cult."*
 
 * [Neoliberalism has conned us into fighting climate change as individuals](https://www.theguardian.com/environment/true-north/2017/jul/17/neoliberalism-has-conned-us-into-fighting-climate-change-as-individuals) <br>
-	"This is the con-job of neoliberalism: to persuade us to address climate
-	 change through our pocket-books, rather than through power and politics."
+	*"This is the con-job of neoliberalism: to persuade us to address climate
+	 change through our pocket-books, rather than through power and politics."*
 	<br>
 	Also on the same line:
 	[Conscious consumerism is a lie. Here’s a better way to help save the world](https://qz.com/920561/conscious-consumerism-is-a-lie-heres-a-better-way-to-help-save-the-world/)
@@ -59,9 +59,9 @@ This is a list of articles on such topic.
 * [The forgotten history of how automakers invented the crime of "jaywalking"](https://www.vox.com/2015/1/15/7551873/jaywalking-history)
 
 * [The Absurd Primacy of the Automobile in American Life](http://www.theatlantic.com/business/archive/2016/04/absurd-primacy-of-the-car-in-american-life/476346/?single_page=true)<br/>
-	"If the price of gasoline and the vehicles that burn it actually reflected
+	*"If the price of gasoline and the vehicles that burn it actually reflected
 	the true costs and damage they inflict, the common car would go extinct.
-	Gasoline would cost way more than $10 a gallon."
+	Gasoline would cost way more than $10 a gallon."*
 
 ## Various Guides and Books
 

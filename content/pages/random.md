@@ -91,7 +91,7 @@ context about it.
 * [Orwell knew: we willingly buy the screens that are used against us](https://aeon.co/ideas/orwell-knew-we-willingly-buy-the-screens-that-are-used-against-us)
 
 * [Caves all the way down](https://aeon.co/essays/is-psychedelics-research-closer-to-theology-than-to-science)
-	<br/>Defferent cultures approach and experience psychedelics in different
+	<br/>Different cultures approach and experience psychedelics in different
 	ways.
 
 ### Car and traffic related
@@ -114,9 +114,9 @@ This is a list of articles on such topic.
 
 ### Relationships
 
-Lately it seems as if I have become more intressted in relatioship-related
-essays. Here is a selection. Relationship here is intended both as concerning a
-couple or between people general.
+Lately I have become more intressted in relatioship-related essays. Here is a
+selection. Relationship here is intended both as concerning a couple or between
+people general.
 
 * [Having children is not life-affirming: it’s immoral](https://aeon.co/essays/having-children-is-not-life-affirming-its-immoral)
 

@@ -114,7 +114,7 @@ This is a list of articles on such topic.
 
 ### Relationships
 
-Lately I have become more intressted in relatioship-related essays. Here is a
+Lately I have become more intrested in relatioship-related essays. Here is a
 selection. Relationship here is intended both as concerning a couple or between
 people general.
 

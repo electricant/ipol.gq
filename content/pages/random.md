@@ -4,15 +4,16 @@ This page contains some links to interesting things I found while surfing the
 net. I try to add a small comment after each link in order to provide some
 context about it.
 
+* [The Transistor, Part 1: Groping in the Dark](https://technicshistory.wordpress.com/2018/01/20/the-transistor-part-1-groping-in-the-dark/)
+	<br/>Three-part history on the transistor. Very well written and
+	instructive.
+
 * [Drowning Doesn’t Look Like Drowning](http://mariovittone.com/2010/05/154/)
 	<br/>People drowning don't behave like in the movies.
 
 * [If correlation doesn't imply causation, then what does?](http://www.michaelnielsen.org/ddi/if-correlation-doesnt-imply-causation-then-what-does)
 	<br/>Some theory about the difference between correlation and causation.
 	Insightful.
-
-* [The Top F2P Monetization Tricks](http://www.gamasutra.com/blogs/RaminShokrizade/20130626/194933/The_Top_F2P_Monetization_Tricks.php)<br/>
-	How free to play (F2P) games trick people into spending money.
 
 * [Boredom is not a problem to be solved. It's the last privilege of a free mind](https://www.theguardian.com/commentisfree/2015/sep/28/boredom-cures-privilege-free-mind)
 
@@ -46,7 +47,7 @@ context about it.
 	[Conscious consumerism is a lie. Here’s a better way to help save the world](https://qz.com/920561/conscious-consumerism-is-a-lie-heres-a-better-way-to-help-save-the-world/)
 
 * [Law in the Jungle](https://aeon.co/essays/the-subalterns-are-speaking-whos-listening) <br>
-	 Essay on the Jungle refugee camp in Calais. The article deals with how
+	 Essay on the Jungle refugee camp in Calais. The article deals with how it
 	 became its own society and what this meant.
 
 * [Teaching ‘grit’ is bad for children, and bad for democracy](https://aeon.co/ideas/teaching-grit-is-bad-for-children-and-bad-for-democracy) <br>
@@ -64,13 +65,34 @@ context about it.
 
 * [Medieval Peasants Got a Lot More Vacation Time Than You](https://nypost.com/2013/09/04/medieval-peasants-got-a-lot-more-vacation-time-than-you-economist/)
 
-* [Having children is not life-affirming: it’s immoral](https://aeon.co/essays/having-children-is-not-life-affirming-its-immoral)
-
 * [Universal Basic Income is a neoliberal plot to make you poorer](https://www.opendemocracy.net/neweconomics/universal-basic-income-is-a-neoliberal-plot-to-make-you-poorer/) <br>
 	*"A closer look at how UBI is expected to work reveals that it is intended to provide political cover for the elimination of social programs and the privatization of social services"*
 
 * [The good guy/bad guy myth](https://aeon.co/essays/why-is-pop-culture-obsessed-with-battles-between-good-and-evil) <br>
 	*"Good guy/bad guy narratives might not possess any moral sophistication, but they do promote social stability, and they’re useful for getting people to sign up for armies and fight in wars with other nations. Their values feel like morality, and the association with folklore and mythology lends them a patina of legitimacy, but still, they don’t arise from a moral vision. They are rooted instead in a political vision, which is why they don’t help us deliberate, or think more deeply about the meanings of our actions."*
+
+* [How to Get Rich](https://www.edge.org/conversation/how-to-get-rich)
+	<br/>The title is kind of a clickbait. This is a talk by Jared Diamond,
+	author of *Guns, Germs, and Steel*. It is a summary of his book.
+
+* [Fitter, Happier, More Productive… and other fantasies of millennial life](https://slightlymarxistfounder.com/2018/03/10/fitter-happier-more-productive/)
+	<br/>*"Radiohead’s OK Computer is turning 21 this year (2018). The album has
+	enjoyed a renaissance of late, finding more relevance in a tech addicted
+	society."*
+
+* [Radical Critique of Wellness Culture](https://newrepublic.com/article/148296/barbara-ehrenreich-radical-crtique-wellness-culture)
+	<br/>Essay about the fear of death typical of contemporary society.
+
+* [Die Like a Dog](https://aeon.co/essays/why-do-we-give-dogs-a-better-death-than-we-give-ourselves)
+	<br/>Pet dogs often have a peaceful death that forestalls protracted
+	suffering and pain. Why can’t we do the same for humans? (see also the
+	article above)
+
+* [Orwell knew: we willingly buy the screens that are used against us](https://aeon.co/ideas/orwell-knew-we-willingly-buy-the-screens-that-are-used-against-us)
+
+* [Caves all the way down](https://aeon.co/essays/is-psychedelics-research-closer-to-theology-than-to-science)
+	<br/>Defferent cultures approach and experience psychedelics in different
+	ways.
 
 ### Car and traffic related
 
@@ -85,6 +107,36 @@ This is a list of articles on such topic.
 	*"If the price of gasoline and the vehicles that burn it actually reflected
 	the true costs and damage they inflict, the common car would go extinct.
 	Gasoline would cost way more than $10 a gallon."*
+
+* [The Social Ideology of the Motorcar](http://unevenearth.org/2018/08/the-social-ideology-of-the-motorcar/)
+	<br/>*"This 1973 essay on how cars have taken over our cities remains as
+	relevant as ever"*
+
+### Relationships
+
+Lately it seems as if I have become more intressted in relatioship-related
+essays. Here is a selection. Relationship here is intended both as concerning a
+couple or between people general.
+
+* [Having children is not life-affirming: it’s immoral](https://aeon.co/essays/having-children-is-not-life-affirming-its-immoral)
+
+* [Buddhists in love](https://aeon.co/essays/does-buddhist-detachment-allow-for-a-healthier-togetherness)
+	<br/>*"Lovers crave intensity, Buddhists say craving causes suffering. Is it
+	possible to be deeply in love yet truly detached?"* Also contains a short
+	primer on Buddhism.
+
+* [Can relationship anarchy create a world without heartbreak?](https://aeon.co/ideas/can-relationship-anarchy-create-a-world-without-heartbreak)
+	<br/>For me this article has been an introduction on the concept of
+	relationship anarchy.
+
+* [Against marriage](https://aeon.co/essays/why-marriage-is-both-anachronistic-and-discriminatory)
+	<br/>Essay on why marriage is actually a bad idea.
+
+* [Why read Aristotle today?](https://aeon.co/essays/what-can-aristotle-teach-us-about-the-routes-to-happiness)
+	<br/>*"The fundamental tenet of peripatetic philosophy is this: the goal of
+	life is to maximise happiness by living virtuously, fulfilling your own
+	potential as a human, and engaging with others – family, friends and fellow
+	citizens – in mutually beneficial activities."*
 
 ## Various Guides and Books
 

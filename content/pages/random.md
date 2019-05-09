@@ -94,6 +94,38 @@ context about it.
 	<br/>Different cultures approach and experience psychedelics in different
 	ways.
 
+* [Is Everything a MLM (Multi Level Marketing scheme)](https://annehelen.substack.com/p/is-everything-an-mlm)
+	<br/>Critical article about PhD and academic jobs in general.
+	<br/> *"too many people coming through grad school, and too few sustainable
+	academic jobs. And as anyone in any field understands, when there’s way more 
+	qualified applicants than jobs, the existing jobs can demand more of
+	applicants (more qualifications, less money) while applicants lower their
+	own expectations (for compensation, for benefits, for job security, for
+	course load and service, for location)."*
+
+* [Ursula K. Le Guin - A Left-Handed Commencement Address (Mills College, 1983)](http://ursulakleguin.com/LeftHandMillsCollege.html)
+	<br/>Talk given by Ursula K. Le Guin at the Mills College. It is about
+	feminism and how male models and language dominate the academy. Food for
+	thought.
+
+* [A Hidden Order of Reality](http://bostonreview.net/philosophy-religion-literature-culture/gili-kliger-hidden-order-reality)
+	<br/>Article about the structuralism of Claude Lévi-Strauss.
+	<br/>*"No amount of conviction in my freedom can unburden me of the
+	structures that impose their contours on daily existence. And that studying
+	the way those structures operate —in our schools, through our prison system,
+	in what we see when we turn on the television— constituted the first step in
+	combatting the awesome reaches of their power."*
+
+* [How to Ruin a Country in Three Decades](https://www.ineteconomics.org/perspectives/blog/how-to-ruin-a-country-in-three-decades)
+	<br/>Article about the roots of Italy's economic crisis
+
+* [How Information Got Re-Invented](http://nautil.us/issue/51/limits/how-information-got-re_invented)
+	<br/>The story behind Shannon's theory of information
+
+* [Paradise Lost?—The iron cage of consumerism](https://timjackson.org.uk/consumerism-theodicy/)
+	<br/>*"Far from creating a credible eschatology, consumerism appears to be a continuous exercise in denial of our own mortality and of the widespread suffering in the world."*
+	<br/>*"we might usefully conclude, countering consumerism must start from more robust secular (or religious) theodicy: the building of meaning structures, communities of meaning, that lie outside the realm of the market; and that offer credible answers to the deep foundational questions that continue to haunt us."*
+
 ### Car and traffic related
 
 It seems as if I quite dislike the idea of being forced to own a car.

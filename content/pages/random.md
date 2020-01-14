@@ -4,6 +4,12 @@ This page contains some links to interesting things I found while surfing the
 net. I try to add a small comment after each link in order to provide some
 context about it.
 
+* [How do people learn to cook a poisonous plant safely?](https://www.bbc.co.uk/news/business-48859333)<br/>
+	Intresting comparison between the development of culture and the scientific 
+	method. However I do not fully agree with the article since science, the
+	same way as our culture, develops by emulation and improvement on previous
+	results by other people.
+
 * [The Transistor, Part 1: Groping in the Dark](https://technicshistory.wordpress.com/2018/01/20/the-transistor-part-1-groping-in-the-dark/)
 	<br/>Three-part history on the transistor. Very well written and
 	instructive.
@@ -126,6 +132,8 @@ context about it.
 	<br/>*"Far from creating a credible eschatology, consumerism appears to be a continuous exercise in denial of our own mortality and of the widespread suffering in the world."*
 	<br/>*"we might usefully conclude, countering consumerism must start from more robust secular (or religious) theodicy: the building of meaning structures, communities of meaning, that lie outside the realm of the market; and that offer credible answers to the deep foundational questions that continue to haunt us."*
 
+* [Economists Are Obsessed with “Job Creation.” How About Less Work?](http://evonomics.com/less-work-job-creation-peter-gray/)
+
 ### Car and traffic related
 
 It seems as if I quite dislike the idea of being forced to own a car.
@@ -172,6 +180,8 @@ people general.
 
 ## Various Guides and Books
 
+* [Static type checking in the programmable programming language (Lisp)](https://medium.com/@MartinCracauer/static-type-checking-in-the-programmable-programming-language-lisp-79bb79eb068a)
+
 * [19 Tips For Everyday Git Use](https://www.alexkras.com/19-git-tips-for-everyday-use/)
 
 * [Cron Best Practices](https://sanctum.geek.nz/arabesque/cron-best-practices/)
@@ -191,6 +201,10 @@ people general.
 	A source of inspiration for computer hostnames
 
 ### Programming
+
+* [A Road to Common Lisp / Steve Losh](http://stevelosh.com/blog/2018/08/a-road-to-common-lisp/)
+
+* [A Quick and Easy Guide to tmux](https://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/)
 
 * [How to interpret complex C/C++ declarations](http://www.codeproject.com/Articles/7042/How-to-interpret-complex-C-C-declarations)<br/>
 	Useful guide for reading C/C++ code.

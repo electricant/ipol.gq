@@ -2,10 +2,13 @@
 
 This is a list of things I'm up to now:
 
+* Designing and building electronics circuits
 * Create things both hardware and software
-* Blog about things I create and about interesting stuff
-* The Ph.D. which is taking up most of my time
-* Swimming and scuba diving.
-* I love tasting craft beers (expecially english ales).
+* Blog about things I create and about interesting stuff<br/>
+	*This is something I should do more often*
+* Making homemade yogurt<br/>
+	*I should also write a post about it one day or another*
+* Swimming and scuba diving
+* Tasting craft beers (expecially english ales)
 
 This page was inspired by [nownownow.com](http://nownownow.com)

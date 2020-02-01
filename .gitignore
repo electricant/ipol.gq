@@ -3,4 +3,5 @@
 
 # generated stuff
 website/*.html
+website/CNAME
 website/articles/*.html

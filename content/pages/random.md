@@ -4,6 +4,13 @@ This page contains some links to interesting things I found while surfing the
 net. I try to add a small comment after each link in order to provide some
 context about it.
 
+* [Who really owns the past?](https://aeon.co/essays/why-cultural-heritage-benefits-the-rich-and-powerful-above-all)<br/>
+	*"Cultural heritage is an ideal imposed from above. It’s time to listen to what communities value about their own histories"*
+
+* [What did Max Weber mean by the ‘spirit’ of capitalism?](https://aeon.co/ideas/what-did-max-weber-mean-by-the-spirit-of-capitalism)
+
+* [Finances, Technology, Repair, and "Enough"](https://syonyk.blogspot.com/2020/02/finances-technology-repair-and-enough.html)
+
 * [How do people learn to cook a poisonous plant safely?](https://www.bbc.co.uk/news/business-48859333)<br/>
 	Intresting comparison between the development of culture and the scientific 
 	method. However I do not fully agree with the article since science, the
@@ -179,6 +186,8 @@ people general.
 	citizens – in mutually beneficial activities."*
 
 ## Various Guides and Books
+
+* [Modern, functional Common Lisp: Myths and tips](https://ambrevar.xyz/modern-common-lisp/index.html)
 
 * [Static type checking in the programmable programming language (Lisp)](https://medium.com/@MartinCracauer/static-type-checking-in-the-programmable-programming-language-lisp-79bb79eb068a)
 

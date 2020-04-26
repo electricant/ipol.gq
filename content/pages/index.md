@@ -1,13 +1,11 @@
 <center>
 	<div class="circlephoto"></div>
-	<em><p>
+	<em>
 		"We're like children who always want to take apart watches to see how
 		they work"
 		<br>
 		(Ernest Rutherford)
-	</p>
 	<br>
-	<p>
 		"Leith dreamily surveyed the long ash of his cigar and turned to me.
 		«Do you know, Anak, you can’t appreciate the joy of being the buffoon,
 		playing the clown. You couldn’t do it if you wished. Your pitiful little
@@ -17,14 +15,15 @@
 		and law-respecting citizen.»"
 		<br>
 		(Jack London, Moon Face: Local Color)
-	</p></em>
+	</em>
 </center>
 <br>
 
 Hi! I'm Paolo and this is my home page.
 
-I am a Ph.D. student at the Department of Information Engineering, University of
-Padova, where I study radio-frequency analog integrated circuits.
+I am a former Ph.D. student at the Department of Information Engineering,
+University of Padova, where I studyed radio-frequency analog integrated
+circuits.
 
 I've been interested in electronics since my childhood. During the years I've
 also been attracted by computer science, programming and technology in general.

@@ -1,6 +1,6 @@
 ;;;;
 ;;;; Source file that compiles the ipol.gq website. It starts from a theme and
-;;;; a bunch of markdown files to bouild up the static webiste.
+;;;; a bunch of markdown files to build up the static webiste.
 ;;;;
 ;;;; USAGE:
 ;;;; Load this file into your lisp interpreter of choice and issue the command
@@ -25,6 +25,7 @@
 ;;; Load required packages. Adjust quicklisp location if needed
 (load "~/.quicklisp/setup.lisp")
 (ql:quickload "cl-markdown" :silent T)
+(ql:quickload "local-time" :silent T)
 
 ;;;
 ;;; Global configuration variables
@@ -66,12 +67,18 @@
           	      (read-sequence data in)
           	            data)))
 
+;;; Render the current unix timestamp as a comment. Useful to force github pages
+;;; to update the website content, even if no actual change was made
+(defun render-timestamp ()
+	(concatenate 'string "<!-- Build timestamp: "
+		(local-time:format-timestring nil (local-time:now)) " -->"))
+          	            
 ;;; Scan the sources directories and build a list of paths as strings
 (defun get-sources ()
   (append (mapcar #'namestring (directory *pages-dir*))
   		  (mapcar #'namestring (directory *articles-dir*))))
 
-;;; Scan the sources directories and bouild a list of paths for compiled html
+;;; Scan the sources directories and build a list of paths for compiled html
 ;;; targets
 (defun get-destinations ()
   (append (mapcar 
@@ -94,7 +101,7 @@
   					   :if-exists :supersede
   					   :if-does-not-exist :create
   					   :external-format *char-enc*)))
-  	(format ostream "~a~&~a~&~a" (render-header) (render-file source) (render-footer))
+  	(format ostream "~a~&~a~&~a~&~a" (render-header) (render-file source) (render-footer) (render-timestamp))
   	(close ostream)))
 
 ;;; Make the website using the functions above

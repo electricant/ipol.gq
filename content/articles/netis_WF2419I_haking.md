@@ -2,12 +2,12 @@
 
 ## Introduction
 
-I had an old (2014-ish) Netis WF2419I [\[1\]][1] router collecting dust in a cabinet at
-home. Its performance has always been lackluster with the WiFi connection
-dropping and restarting every few minutes. I bought it to serve as a guest AP
-for my dorm while I was studying in Padova. After I moved I've never used it any
-more and switched to a whole different setup (which I hope to describe in
-another post).
+I had an old (2014-ish) Netis WF2419I [\[1\]][1] router collecting dust in a
+cabinet at home. Its performance has always been lackluster with the WiFi
+connection dropping and restarting every few minutes. I bought it to serve as a
+guest AP for my dorm while I was studying in Padova. After I moved I've never
+used it any more and switched to a whole different setup (which I hope to
+describe in another post).
 
 This router was almost forgotten, until I read an excellent artcle by George
 Hilliard [\[2\]][2] about hacking Reolink cameras. This was enough to spark my
@@ -44,11 +44,16 @@ The following components appear before us onto the sea of green of the board:
 
 As a first step let's look up on our favourite search engine for the main router
 chipset datasheet. And sure enough somebody (thank you!) released a confidential
-copy for us to read [\[3\]][3]. Let's scroll right-ahead to the pinout, shall
-we? Let's neglect all the other details for the moment. Remember we are looking
-for a serial port!
+copy for us to read [\[3\]][3]. Let's neglect all the other details for the
+moment and scroll right-ahead to the pinout. Remember we are looking for a
+serial port.
 
-[figura col pinout]
+<figure>
+	<a href="/res/img/wf2419_hacking/chipset_pinout.png">
+		<img src="/res/img/wf2419_hacking/chipset_pinout.png"/>
+	</a>
+	<figcaption>Realtek RTL8196C chipset pinout.</figcaption>
+</figure>
 
 And sure enough here it is! Look at the above picture. In the bottom-right part
 we have two pins (pin 36 and 37) labelled `UART_RX/GPIOA7` and
@@ -243,11 +248,16 @@ and see what we obtain by dumping the contents of the flash.
 
 ## Dumping The Flash Contents
 
-The flash chip was already identified by visual inspection. Time to download its 
-datasheet [\[4]][4] to get the pinout and connect it to our beloved Bus Pirate 
-[\[5]][5].
+The flash chip was already identified by visual inspection to be a Winbond 
+W25Q32FV chip. Time to download its datasheet [\[4]][4] to get the pinout and
+connect it to our beloved Bus Pirate [\[5]][5].
 
-[figura pinout flash]
+<figure>
+	<a href="/res/img/wf2419_hacking/flash_pinout.gif">
+		<img src="/res/img/wf2419_hacking/flash_pinout.gif"/>
+	</a>
+	<figcaption>Winbond W25Q32FV flash chip pinout.</figcaption>
+</figure>
 
 Now that we know the pinout let's figure out how to connect the chip for using
 `flashrom` [\[6]][6] on it. I'll try In-System Programming (ISP) [\[7]][7]

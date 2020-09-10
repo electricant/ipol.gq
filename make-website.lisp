@@ -26,6 +26,7 @@
 (load "~/.quicklisp/setup.lisp")
 (ql:quickload "cl-markdown" :silent T)
 (ql:quickload "local-time" :silent T)
+(ql::quickload "cl-ppcre" :silent T)
 
 ;;;
 ;;; Global configuration variables
@@ -46,21 +47,30 @@
 ;;;
 ;;; Various functions and code
 ;;;
+(load "theme/header.lisp") ; load theme header
 
-;;; Convert a markdown file to html and return the content as a string
+;;; Return the article title contained in the line passed as parameter.
+;;; NIL if no title is found. The title is identified by the string "# " at the
+;;; beginning. A regex is used to identify and remove such string to put the
+;;; title in the header.
+(defun title-from-line (line)
+	(multiple-value-bind (title matched) (cl-ppcre:regex-replace "# " line "")
+	(if matched title)))
+
+;;; Convert a markdown file to html and return the content as a string.
+;;; The title of the article is assumed to be witin the first line, with a '#'
+;;; before the actual string.
+;;; It returns a list where the first element is the title (or nil if no title)
+;;; and the rendered markdown
 (defun render-file (filename)
   (with-open-file (in filename)
   	(let ((data (make-string (file-length in))))
   	  (read-sequence data in)
-  	  (cl-markdown:render-to-stream (cl-markdown:markdown data :stream nil)
-  	  								:html nil))))
+  	  (list (title-from-line (read-line (make-string-input-stream data)))
+  	        (cl-markdown:render-to-stream(cl-markdown:markdown data :stream nil)
+  	  								:html nil)))))
 
-(defun render-header ()
-  (with-open-file (in "theme/header.html")
-  	(let ((data (make-string (file-length in))))
-  	  (read-sequence data in)
-  	  data)))
-
+;;; Render footer from the theme. TODO: make it dynamic like the header 
 (defun render-footer ()
     (with-open-file (in "theme/footer.html")
           (let ((data (make-string (file-length in))))
@@ -100,10 +110,14 @@
   (let ((ostream (open dest :direction :output
   					   :if-exists :supersede
   					   :if-does-not-exist :create
-  					   :external-format *char-enc*)))
-  	(format ostream "~a~&~a~&~a~&~a" (render-header) (render-file source) (render-footer) (render-timestamp))
+  					   :external-format *char-enc*))
+  		(content_html (render-file source))			   )
+  	(format ostream "~a~&~a~&~a~&~a" (header-str (car content_html))
+	                                 (cadr content_html)
+	                                 (render-footer)
+	                                 (render-timestamp))
   	(close ostream)))
 
 ;;; Make the website using the functions above
 (defun make-website ()
-  (mapc #'(lambda(fl) (build-file (car fl) (cdr fl))) (sources-alist)))
+	(mapc #'(lambda(fl) (build-file (car fl) (cdr fl))) (sources-alist)))

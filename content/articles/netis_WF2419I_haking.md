@@ -23,8 +23,8 @@ First off let's set some goals to keep us on track:
 
 As you can see some of those goals are not easy. Moreover, Murphy's law gets you
 every time and many roadblocks were encountered during this journey. I will not
-spare any of the detials, including the __MANY__ failed attempts. That's why I'm 
-calling this page a diary.
+spare any of the detials, including the __MANY__ failed attempts. That's why 
+I'm calling this page a diary.
 
 At the time of writing I'm quite far from completion. Depending how long this
 grows I might decide to split this post into a series.
@@ -56,13 +56,18 @@ serial port.
 </figure>
 
 And sure enough here it is! Look at the above picture. In the bottom-right part
-we have two pins (pin 36 and 37) labelled `UART_RX/GPIOA7` and
-`UART_TX/GPIOB0`. With a multimeter those two pins are tracked to the
-unpopulated header labelled `J1`. Time to solder a pin header and connect a
-TTL to USB adapter. But HEI! Wait! What's the baud rate? A quck check with an
-oscilloscope (some trial and error works too) revealed it's `38400bps`.
+we have two pins (pin 36 and 37) labelled <tt>UART_RX/GPIOA7</tt> and
+<tt>UART_TX/GPIOB0</tt>. With a multimeter those two pins are tracked to the
+unpopulated header labelled <tt>J1</tt>. Time to solder a pin header and connect
+a TTL to USB adapter. But HEI! Wait! What's the baud rate? A quck check with an
+oscilloscope (some trial and error works too) revealed it's <tt>38400bps</tt>.
 
-[figura pin header saldato]
+<figure>
+	<a href="/res/img/wf2419_hacking/pin_header.jpg">
+		<img src="/res/img/wf2419_hacking/pin_header.jpg"/>
+	</a>
+	<figcaption>Pin header soldered to <tt>J1</tt>.</figcaption>
+</figure>
 
 After connecting a TTL to serial adapter and issuing
 	
@@ -260,21 +265,26 @@ connect it to our beloved Bus Pirate [\[5]][5].
 </figure>
 
 Now that we know the pinout let's figure out how to connect the chip for using
-`flashrom` [\[6]][6] on it. I'll try In-System Programming (ISP) [\[7]][7]
-first since it is much quicker. If this won't work the only solution is to 
-desolder and resolder the flash chip from the board every time we have to read 
-or program it. This is time consuming and I'd like to avoid it at all cost.
+<tt>flashrom</tt> [\[6]][6] on it. I'll try In-System Programming (ISP)
+[\[7]][7] first since it is much quicker. If this won't work the only solution
+is to desolder and resolder the flash chip from the board every time we have to
+read or program it. This is time consuming and I'd like to avoid it at all cost.
 
 A quick reverse engineering of the traces around the chip revealed that pin 3 
-and pin 7 (`/WP` and `/HOLD` respectively) which, according to [\[6]][6] should
-be connected to 3.3V on the bus pirate, are already tied to the VCC pin (pin 8).
-Therefore, only 6 out of 8 wires have to be connected.
+and pin 7 (<tt>/WP</tt> and <tt>/HOLD</tt> respectively) which, according to
+[\[6]][6] should be connected to 3.3V on the bus pirate, are already tied to the
+VCC pin (pin 8). Therefore, only 6 out of 8 wires have to be connected.
 
 Let's get back to our trusty soldering iron. Twenty minutes later, with a piece
 of an old ATA cable (the 80-wire version which uses smaller conductors) we have
 a nice little connector ready to be plugged into the Bus Pirate socket.
 
-[figura adapter cable connesso to bus pirata]
+<figure>
+	<a href="/res/img/wf2419_hacking/flash_buspirate.jpg">
+		<img src="/res/img/wf2419_hacking/flash_buspirate.jpg"/>
+	</a>
+	<figcaption>Bus Pirate ISP connection to the flash chip.</figcaption>
+</figure>
 
 To check for a successful connection the following command was issued:
 
@@ -292,7 +302,8 @@ Hurray! The flash chip was recognized correctly. Time to dump its contents.
 	$ sudo flashrom -p buspirate_spi:dev=/dev/ttyUSB0,spispeed=2M -r firmware_orig.bin
 
 Let's now extract the contents of the dump recursively to see what's inside. At
-the end of the process we should have a folder named `_firmware_orig.bin.extracted`.
+the end of the process we should have a folder named 
+<tt>_firmware_orig.bin.extracted</tt>.
 
 	$ binwalk -e firmware_orig.bin 
 
@@ -306,13 +317,13 @@ the end of the process we should have a folder named `_firmware_orig.bin.extract
 	WARNING: Extractor.execute failed to run external extractor 'sasquatch -p 1 -be -d 'squashfs-root' '%e'': [Errno 2] No such file or directory: 'sasquatch', 'sasquatch -p 1 -be -d 'squashfs-root' '%e'' might not be installed correctly
 	851968        0xD0000         Squashfs filesystem, big endian, version 2.0, size: 2076096 bytes, 389 inodes, blocksize: 65536 bytes, created: 2015-06-30 08:57:47
 
-What are those warnings and why is my folder `squashfs-root` empty? Apparently
-sasquatch is not installed in my system and `$ sudo apt search sasquatch` does
-not return any result. Allright it's not the first time I have to compile and
-install something from source on my system. It's strange however that the Debian
-repos are missing this useful piece of software. Sasquatch is downloaded from
-[\[8\]][8] and `build.sh` does all the requisite stuff for building and
-installing.
+What are those warnings and why is my folder <tt>squashfs-root</tt> empty?
+Apparently sasquatch is not installed in my system and
+<tt>$ sudo apt search sasquatch</tt> does not return any result. Allright it's
+not the first time I have to compile and install something from source on my
+system. It's strange however that the Debian repos are missing this useful piece
+of software. Sasquatch is downloaded from [\[8\]][8] and <tt>build.sh</tt> does
+all the requisite stuff for building and installing.
 
 Obviously this is not so easy. The building fails with a ton of messages like 
 the following:
@@ -371,8 +382,303 @@ rabbit hole.
 
 ## Rebuilding the Flash Image and First Roadblocks
 
-## Blah Blah and even More Roadblocks
+This is the root folder structure of the extracted image:
 
+	$ ls -l _firmware_orig.bin.extracted/squashfs-root/
+	total 0
+	drwxr-xr-x 2 pol pol 3580 Jun 30  2015 bin
+	drwxrwxrwx 2 pol pol   60 Jun 30  2015 dev
+	drwxrwxrwx 3 pol pol  600 Jun 30  2015 etc
+	drwxr-xr-x 2 pol pol  320 Jun 30  2015 lib
+	lrwxrwxrwx 1 pol pol   10 Sep 11 12:39 media -> /var/media
+	drwxrwxrwx 2 pol pol   40 Jun 30  2015 proc
+	drwxr-xr-x 2 pol pol  180 Jun 30  2015 sbin
+	lrwxrwxrwx 1 pol pol    8 Sep 11 12:39 sys -> /var/sys
+	lrwxrwxrwx 1 pol pol    8 Sep 11 12:39 tmp -> /var/tmp
+	drwxr-xr-x 4 pol pol   80 Jun 30  2015 usr
+	drwxrwxrwx 2 pol pol   40 Jun 30  2015 var
+	drwxr-xr-x 8 pol pol  300 Jun 30  2015 web
+	
+The easiest thing to do is modifying the index.htm of the router configuration
+webpage adding some test code just to see if everything worked. The directory
+<tt>firmware_orig.bin.extracted</tt> and its content was copied to
+<tt>firmware.extracted_new</tt> to preserve the original files. Then 
+<tt>firmware.extracted_new/squashfs-root/web/index.htm</tt> was modified by
+appending the following lines just before the closing html tag.
+	
+	<script>
+		alert("I have been pwned!");
+	</script>
+
+This should display an alert window as soon as the page is loaded.
+
+Save and close. Now it's time to rebuild the image and see if it boots. Let's
+have more details about the filesystem type before attempting to re-create it.
+	
+	$ unsquashfs -s D0000.squashfs 
+	Reading a different endian SQUASHFS filesystem on D0000.squashfs
+	Found a valid big endian SQUASHFS 2:0 superblock on D0000.squashfs.
+	Creation or last append time Tue Jun 30 10:57:47 2015
+	Filesystem size 2076096 bytes (2027.44 Kbytes / 1.98 Mbytes)
+	Block size 65536
+	Filesystem is not exportable via NFS
+	Inodes are compressed
+	Data is compressed
+	Fragments are compressed
+	Always-use-fragments option is not specified
+	Check data is not present in the filesystem
+	Duplicates are removed
+	Number of fragments 27
+	Number of inodes 389
+	Number of uids 1
+	Number of gids 0	
+
+### The Easy Way
+
+The first attempt was done using the version of squashfs-tools provided by the
+Debian packages (version 4.4 at the time of writing).
+
+	$ mksquashfs squashfs-root D0000.new.squashfs -b 65536 -all-root -noappend
+
+	$ unsquashfs -s D0000.new.squashfs 
+	Found a valid SQUASHFS 4:0 superblock on D0000.new.squashfs.
+	Creation or last append time [... redacted ...]
+	Filesystem size 2788625 bytes (2723.27 Kbytes / 2.66 Mbytes)
+	Compression gzip
+	Block size 65536
+	Filesystem is exportable via NFS
+	Inodes are compressed
+	Data is compressed
+	Uids/Gids (Id table) are compressed
+	Fragments are compressed
+	Always-use-fragments option is not specified
+	Xattrs are compressed
+	Duplicates are removed
+	Number of fragments 26
+	Number of inodes 366
+	Number of ids 1
+
+Apart for the different superblock version we have that the filesystem size is
+bigger, the endiannes is gone and the number of inodes is lower than the
+original image. What is going on? I decided to tackle one issue at a time.
+
+First of all is the squashfs filesystem backwards-compatible? Apparently
+SquashFS v4.0 moved to a fixed little-endian format (even for big-endian
+systems). The odds of the new image booting are already quite low. For the sake
+of science I decided to find it out the hard way.
+
+	$ cp ../firmware_orig.bin firmware_pwned.bin
+	$ dd if=D0000.new.squashfs of=firmware_pwned.bin bs=1 seek=$((0xD0000)) conv=notrunc
+	$ sudo flashrom -p buspirate_spi:dev=/dev/ttyUSB0,spispeed=2M -w firmware.extracted_new/firmware_pwned.bin 
+
+And sure enough when the router is turned on it is stuck in a bootloop unable to
+mount the root filesystem.
+
+### The Hard Way
+
+Of course it cannot be so easy. Can we install a different version of
+squashfs-tools from the Debian repos? Of course not. We have to compile our own.
+The first thing I did was to download from sourceforge [\[9\]][9] the squashfs
+sources for version 2.2-r2. Due to different gcc behaviour and different header
+files, to get this squashfs-tools version compile on my system the following
+changes need to be applied:
+
+	$ diff -u squashfs2.2-r2/squashfs-tools squashfs-tools
+	
+	--- squashfs2.2-r2/squashfs-tools/Makefile	2005-09-01 01:21:14.000000000 +0200
+	+++ squashfs-tools/Makefile	2020-08-17 14:39:16.792112129 +0200
+	@@ -1,6 +1,7 @@
+	 INCLUDEDIR = .
+	 
+	-CFLAGS := -I$(INCLUDEDIR) -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -g
+	+CFLAGS := -I$(INCLUDEDIR) -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -g -O2 \
+	+	-fcommon -std=gnu89
+	 
+	 mksquashfs: mksquashfs.o read_fs.o sort.o
+		$(CC) mksquashfs.o read_fs.o sort.o -lz -o $@
+	--- squashfs2.2-r2/squashfs-tools/mksquashfs.c	2005-09-09 00:34:28.000000000 +0200
+	+++ squashfs-tools/mksquashfs.c	2020-08-17 14:42:08.037022333 +0200
+	@@ -28,6 +28,7 @@
+	 #include <unistd.h>
+	 #include <stdio.h>
+	 #include <sys/types.h>
+	+#include <sys/sysmacros.h>
+	 #include <sys/stat.h>
+	 #include <fcntl.h>
+	 #include <errno.h>
+
+Now that a working copy of mksquashf version 2 is obtained we can try to rebuild
+the filesystem.
+
+	$ squashfs/squashfs2.2-r2/squashfs-tools/mksquashfs squashfs-root D0000.new.squashfs -b 65536 -all-root -noappend -2.0 -be
+
+	$ unsquashfs -s D0000.new.squashfs 
+	Reading a different endian SQUASHFS filesystem on D0000.new.squashfs
+	Found a valid big endian SQUASHFS 2:0 superblock on D0000.new.squashfs.
+	Creation or last append time Wed Sep 23 14:15:42 2020
+	Filesystem size 2785979 bytes (2720.68 Kbytes / 2.66 Mbytes)
+	Block size 65536
+	Filesystem is not exportable via NFS
+	Inodes are compressed
+	Data is compressed
+	Fragments are compressed
+	Always-use-fragments option is not specified
+	Check data is not present in the filesystem
+	Duplicates are removed
+	Number of fragments 26
+	Number of inodes 366
+	Number of uids 1
+	Number of gids 0
+
+The issue about endiannes and superblock version are solved. There is still a
+different number of inodes and a bigger filesystem size. But hey, who cares
+right? The steps in the previous section to create a new flash image and put it
+on the router are followed but the router is still stuck in a boot loop.
+
+What are those missing inodes anyway? Maybe extracting the SquashFS filesystem
+manually will yeld more information.
+
+	$ unsquashfs D0000.squashfs 
+	Reading a different endian SQUASHFS filesystem on D0000.squashfs
+	read_ids: Bad inode count in super block
+	File system corruption detected
+	FATAL ERROR:failed to read file system tables
+
+Now I'm getting why binwalk was using sasquatch to extract the root filesystem
+image. Let's do the same
+
+	$ sasquatch D0000.squashfs 
+	SquashFS version [512.0] / inode count [-2063532032] suggests a SquashFS image of a different endianess
+	Reading a different endian SQUASHFS filesystem on D0000.squashfs
+	Parallel unsquashfs: Using 1 processor
+	Trying to decompress using default gzip decompressor...
+	Trying to decompress with lzma...
+	Trying to decompress with lzma-adaptive...
+	Detected lzma-adaptive compression
+	369 inodes (439 blocks) to write
+
+
+	create_inode: could not create character device squashfs-root/dev/ptyp0, because you're not superuser!
+
+	[... lots of lines as the one above ...]
+	
+	created 237 files
+	created 20 directories
+	created 109 symlinks
+	created 0 devices
+	created 0 fifos
+
+This was one of those moments when you realize you were barking up the wrong
+tree all the time. Facepalm. The missing inodes are the character devices. Of
+course nothing will boot! Binwalk did not have the required persmissions to
+create them. We have to extract the filesystem as root:
+
+	$ sudo sasquatch D0000.squashfs 
+	[sudo] password for pol: 
+	SquashFS version [512.0] / inode count [-2063532032] suggests a SquashFS image of a different endianess
+	Reading a different endian SQUASHFS filesystem on D0000.squashfs
+	Parallel unsquashfs: Using 1 processor
+	Trying to decompress using default gzip decompressor...
+	Trying to decompress with lzma...
+	Trying to decompress with lzma-adaptive...
+	Detected lzma-adaptive compression
+	369 inodes (439 blocks) to write
+
+	[===============================================================|] 439/439 100%
+
+	created 237 files
+	created 20 directories
+	created 109 symlinks
+	created 23 devices
+	created 0 fifos
+
+Now we are talking! Well... not really. If we rebuild the filesystem once again
+as we did before, the only difference now is filesystem size. However, the
+router is still stuck in a bootloop. A quick check to the size of the final
+flash image size confirms that the new image is not too big to fit in the flash
+chip. What is still missing is the correct compression algorithm. By looking at
+the output above we see that lzma-adaptive compression was detected. Version 2.2
+of mksquashfs does not support lzma compression by default. A working copy of
+squashfs-lzma [\[10\]][10] is needed. But I was fed up of blindly trying stuff
+until something works, so I downloaded the GPL code [\[11\]][11] (thanks Richard
+Stallman) for my router model and started inspecting the package contents to
+find some clues about how the flash image is built. 
+
+### GPL Code is Fun
+
+Inside the image the directory
+<tt>GPL_Code_RTL/rtl819x-sdk-v1.2/AP/squashfs-tools</tt> is found. After copying
+it somewhere else, the code inside such directory was patched in a similar
+fashion as SquashFS 2.2-r2.
+
+$ diff -ru squashfs-tools-orig squashfs-tools/
+	--- squashfs-tools-orig/Makefile	2013-11-10 14:56:41.000000000 +0100
+	+++ squashfs-tools/Makefile	2020-08-17 15:37:34.758142333 +0200
+	@@ -1,7 +1,8 @@
+	 INCLUDEDIR = .
+	 LZMAPATH = ./lzma/SRC/7zip/Compress/LZMA_Lib
+	 
+	-CFLAGS := -I$(INCLUDEDIR) -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -O2
+	+CFLAGS := -I$(INCLUDEDIR) -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -O2 \
+	+	-fcommon -std=gnu89
+	 
+	 all: mksquashfs mksquashfs-lzma
+	 
+	--- squashfs-tools-orig/mksquashfs.c	2013-11-10 14:56:41.000000000 +0100
+	+++ squashfs-tools/mksquashfs.c	2020-08-17 15:38:32.368332562 +0200
+	@@ -27,6 +27,7 @@
+	 #include <unistd.h>
+	 #include <stdio.h>
+	 #include <sys/types.h>
+	+#include <sys/sysmacros.h>
+	 #include <sys/stat.h>
+	 #include <fcntl.h>
+	 #include <errno.h>
+
+The sources are compiled with <tt>make</tt> and we are left with
+<tt>mksquashfs-lzma</tt> which can be used to build the new filesystem as usual.
+
+	$ squashfs/squashfs-tools/mksquashfs-lzma squashfs-root D0000.new.squashfs -b 65536 -all-root -noappend -be
+
+After flashing the new image the router boots succesfully. If we point our
+browser to its configuration page (available at <tt>http://192.168.1.1</tt> by
+default) and login with the default credentials the we get the following
+webpage.
+
+<figure>
+	<a href="/res/img/wf2419_hacking/pwned_success.png">
+		<img src="/res/img/wf2419_hacking/pwned_success.png"/>
+	</a>
+	<figcaption>Success! A pwned index.htm appears.</figcaption>
+</figure>
+
+Hurray! We can now do whatever we want with the root filesystem! To avoid
+manually entering a series of commands to build the new image, I created a small
+script available on GitHub [\[12\]][12].
+
+## Compiling Software and More Roadblocks
+
+custom kernel? we need a working compiler
+
+buildroot
+
+patches
+
+compiling stuff and endiannes
+
+stuck! illegal instruction
+
+flip table and go working to something else
+
+## Conclusion
+
+Apply patchset manually ?
+
+Use a different buildroot version ?
+
+Is it worth it ? No
+
+Still good training time to tackle something else (more to follow)
 
 ## References
 
@@ -399,3 +705,15 @@ rabbit hole.
 
 8. [GitHub - devttys0/sasquatch][8]
 [8]: https://github.com/devttys0/sasquatch
+
+9. [squashfs - a compressed fs for Linux - Browse /squashfs at SourceForge.net][9]
+[9]: https://sourceforge.net/projects/squashfs/files/squashfs/
+
+10. [Official Squashfs LZMA][10]
+[10]: https://squashfs-lzma.org/
+
+11. [Netis GPL Code][11]
+[11]: http://www.netis-systems.com/Suppory/gpl.html
+
+12. [TODO https://github.com/][12]
+[12]: https://github.com/

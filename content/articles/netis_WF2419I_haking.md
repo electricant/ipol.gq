@@ -1,4 +1,4 @@
-# Netis WF2419I Router Haking Diary
+# Netis WF2419I Router Hacking Diary
 
 ## Introduction
 
@@ -9,7 +9,7 @@ guest AP for my dorm while I was studying in Padova. After I moved I've never
 used it any more and switched to a whole different setup (which I hope to
 describe in another post).
 
-This router was almost forgotten, until I read an excellent artcle by George
+This router was almost forgotten, until I read an excellent article by George
 Hilliard [\[2\]][2] about hacking Reolink cameras. This was enough to spark my
 interest in trying to reverse engineer and add as much new functionality as
 possible to this old (and somewhat crappy) piece of hardware.
@@ -23,7 +23,7 @@ First off let's set some goals to keep us on track:
 
 As you can see some of those goals are not easy. Moreover, Murphy's law gets you
 every time and many roadblocks were encountered during this journey. I will not
-spare any of the detials, including the __MANY__ failed attempts. That's why 
+spare any of the details, including the __MANY__ failed attempts. That's why 
 I'm calling this page a diary.
 
 At the time of writing I'm quite far from completion. Depending how long this
@@ -32,7 +32,7 @@ grows I might decide to split this post into a series.
 ## Opening up the Device & Talking to the Serial Port
 
 This is the easy part. Just remove the two screws on the bottom side (one is
-hidden by the mandatory 'warranty void if seal is broken' stiker, about which I
+hidden by the mandatory 'warranty void if seal is broken' sticker, about which I
 couldn't care less) and pop open the case.
 
 The following components appear before us onto the sea of green of the board:
@@ -40,7 +40,7 @@ The following components appear before us onto the sea of green of the board:
  * Realtek RTL8192CE - WiFi chipset
  * Winbond W25Q32FV - 32Mbit (4MB) SPI FLASH memory
  * ESMT M12L128168A - 2M x 16 Bit x 4 Banks (16MB) SDRAM
- * A few testpoints, probably for JTAG and UART access
+ * A few test points, probably for JTAG and UART access
 
 As a first step let's look up on our favourite search engine for the main router
 chipset datasheet. And sure enough somebody (thank you!) released a confidential
@@ -59,7 +59,7 @@ And sure enough here it is! Look at the above picture. In the bottom-right part
 we have two pins (pin 36 and 37) labelled <tt>UART_RX/GPIOA7</tt> and
 <tt>UART_TX/GPIOB0</tt>. With a multimeter those two pins are tracked to the
 unpopulated header labelled <tt>J1</tt>. Time to solder a pin header and connect
-a TTL to USB adapter. But HEI! Wait! What's the baud rate? A quck check with an
+a TTL to USB adapter. But HEI! Wait! What's the baud rate? A quick check with an
 oscilloscope (some trial and error works too) revealed it's <tt>38400bps</tt>.
 
 <figure>
@@ -73,7 +73,7 @@ After connecting a TTL to serial adapter and issuing
 	
 	$ screen -L /dev/ttyUSB0 38400
 	
-when we start the router we get the following messages:
+When we start the router we get the following messages:
 	
 	=============================
 	
@@ -303,7 +303,7 @@ Hurray! The flash chip was recognized correctly. Time to dump its contents.
 
 Let's now extract the contents of the dump recursively to see what's inside. At
 the end of the process we should have a folder named 
-<tt>_firmware_orig.bin.extracted</tt>.
+<tt>\_firmware\_orig.bin.extracted</tt>.
 
 	$ binwalk -e firmware_orig.bin 
 
@@ -319,7 +319,7 @@ the end of the process we should have a folder named
 
 What are those warnings and why is my folder <tt>squashfs-root</tt> empty?
 Apparently sasquatch is not installed in my system and
-<tt>$ sudo apt search sasquatch</tt> does not return any result. Allright it's
+<tt>$ sudo apt search sasquatch</tt> does not return any result. Alright it's
 not the first time I have to compile and install something from source on my
 system. It's strange however that the Debian repos are missing this useful piece
 of software. Sasquatch is downloaded from [\[8\]][8] and <tt>build.sh</tt> does
@@ -373,9 +373,9 @@ to go ahead with our extraction.
 	1947112       0x1DB5E8        Unix path: /usr/lib/libc.so.1
 
 Great. The image contains some LZMA compressed data, probably kernel and
-bootlader, and a squashfs filesystem. Conveniently binwalk will extract those
+bootloader, and a squashfs file system. Conveniently binwalk will extract those
 files for us and sure enough we get a kernel (version 2.4.18 of course), some
-certificates and the contents of our root filesystem which we are now able to
+certificates and the contents of our root file system which we are now able to
 inspect and modify. The expert reader may already have noticed the first mistake
 here. If nothing above looks wrong fasten your seat belt we're going deep down a
 rabbit hole.
@@ -413,7 +413,7 @@ appending the following lines just before the closing html tag.
 This should display an alert window as soon as the page is loaded.
 
 Save and close. Now it's time to rebuild the image and see if it boots. Let's
-have more details about the filesystem type before attempting to re-create it.
+have more details about the file system type before attempting to re-create it.
 	
 	$ unsquashfs -s D0000.squashfs 
 	Reading a different endian SQUASHFS filesystem on D0000.squashfs
@@ -458,11 +458,11 @@ Debian packages (version 4.4 at the time of writing).
 	Number of inodes 366
 	Number of ids 1
 
-Apart for the different superblock version we have that the filesystem size is
+Apart for the different superblock version we have that the file system size is
 bigger, the endiannes is gone and the number of inodes is lower than the
 original image. What is going on? I decided to tackle one issue at a time.
 
-First of all is the squashfs filesystem backwards-compatible? Apparently
+First of all is the squashfs file system backwards-compatible? Apparently
 SquashFS v4.0 moved to a fixed little-endian format (even for big-endian
 systems). The odds of the new image booting are already quite low. For the sake
 of science I decided to find it out the hard way.
@@ -472,7 +472,7 @@ of science I decided to find it out the hard way.
 	$ sudo flashrom -p buspirate_spi:dev=/dev/ttyUSB0,spispeed=2M -w firmware.extracted_new/firmware_pwned.bin 
 
 And sure enough when the router is turned on it is stuck in a bootloop unable to
-mount the root filesystem.
+mount the root file system.
 
 ### The Hard Way
 
@@ -507,8 +507,8 @@ changes need to be applied:
 	 #include <fcntl.h>
 	 #include <errno.h>
 
-Now that a working copy of mksquashf version 2 is obtained we can try to rebuild
-the filesystem.
+Now that a working copy of mksquashfs version 2 is obtained we can try to
+rebuild the file system.
 
 	$ squashfs/squashfs2.2-r2/squashfs-tools/mksquashfs squashfs-root D0000.new.squashfs -b 65536 -all-root -noappend -2.0 -be
 
@@ -531,12 +531,12 @@ the filesystem.
 	Number of gids 0
 
 The issue about endiannes and superblock version are solved. There is still a
-different number of inodes and a bigger filesystem size. But hey, who cares
+different number of inodes and a bigger file system size. But hey, who cares
 right? The steps in the previous section to create a new flash image and put it
 on the router are followed but the router is still stuck in a boot loop.
 
-What are those missing inodes anyway? Maybe extracting the SquashFS filesystem
-manually will yeld more information.
+What are those missing inodes anyway? Maybe extracting the SquashFS file system
+manually will yield more information.
 
 	$ unsquashfs D0000.squashfs 
 	Reading a different endian SQUASHFS filesystem on D0000.squashfs
@@ -544,7 +544,7 @@ manually will yeld more information.
 	File system corruption detected
 	FATAL ERROR:failed to read file system tables
 
-Now I'm getting why binwalk was using sasquatch to extract the root filesystem
+Now I'm getting why binwalk was using sasquatch to extract the root file system
 image. Let's do the same
 
 	$ sasquatch D0000.squashfs 
@@ -570,8 +570,8 @@ image. Let's do the same
 
 This was one of those moments when you realize you were barking up the wrong
 tree all the time. Facepalm. The missing inodes are the character devices. Of
-course nothing will boot! Binwalk did not have the required persmissions to
-create them. We have to extract the filesystem as root:
+course nothing will boot! Binwalk did not have the required permissions to
+create them. We have to extract the file system as root:
 
 	$ sudo sasquatch D0000.squashfs 
 	[sudo] password for pol: 
@@ -592,8 +592,8 @@ create them. We have to extract the filesystem as root:
 	created 23 devices
 	created 0 fifos
 
-Now we are talking! Well... not really. If we rebuild the filesystem once again
-as we did before, the only difference now is filesystem size. However, the
+Now we are talking! Well... not really. If we rebuild the file system once again
+as we did before, the only difference now is file system size. However, the
 router is still stuck in a bootloop. A quick check to the size of the final
 flash image size confirms that the new image is not too big to fit in the flash
 chip. What is still missing is the correct compression algorithm. By looking at
@@ -606,7 +606,7 @@ find some clues about how the flash image is built.
 
 ### GPL Code is Fun
 
-Inside the image the directory
+Inside the package the directory
 <tt>GPL\_Code\_RTL/rtl819x-sdk-v1.2/AP/squashfs-tools</tt> is found. After
 copying it somewhere else, the code inside such directory was patched in a 
 similar fashion as SquashFS 2.2-r2.
@@ -636,11 +636,12 @@ similar fashion as SquashFS 2.2-r2.
 	 #include <errno.h>
 
 The sources are compiled with <tt>make</tt> and we are left with
-<tt>mksquashfs-lzma</tt> which can be used to build the new filesystem as usual.
+<tt>mksquashfs-lzma</tt> which can be used to build the new file system as
+usual.
 
 	$ squashfs/squashfs-tools/mksquashfs-lzma squashfs-root D0000.new.squashfs -b 65536 -all-root -noappend -be
 
-After flashing the new image the router boots succesfully. If we point our
+After flashing the new image the router boots successfully. If we point our
 browser to its configuration page (available at <tt>http://192.168.1.1</tt> by
 default) and login with the default credentials the we get the following
 webpage.
@@ -652,7 +653,7 @@ webpage.
 	<figcaption>Success! A pwned index.htm appears.</figcaption>
 </figure>
 
-Hurray! We can now do whatever we want with the root filesystem! To avoid
+Hurray! We can now do whatever we want with the root file system! To avoid
 manually entering a series of commands to build the new image, I created a small
 script available on GitHub [\[12\]][12].
 
@@ -694,7 +695,7 @@ Still good training time to tackle something else (more to follow)
 \[4\] [W25Q32FV Datasheet][4]
 [4]: https://www.winbond.com/resource-files/w25q32fv%20revi%2010202015.pdf
 
-\[5\] [Bus_Pirate - Dangerous Prototypes][5]
+\[5\] [Bus Pirate - Dangerous Prototypes][5]
 [5]: http://dangerousprototypes.com/docs/Bus_Pirate
 
 \[6\] [Bus Pirate - flashrom][6]

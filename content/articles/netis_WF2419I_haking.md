@@ -607,11 +607,11 @@ find some clues about how the flash image is built.
 ### GPL Code is Fun
 
 Inside the image the directory
-<tt>GPL_Code_RTL/rtl819x-sdk-v1.2/AP/squashfs-tools</tt> is found. After copying
-it somewhere else, the code inside such directory was patched in a similar
-fashion as SquashFS 2.2-r2.
+<tt>GPL\_Code\_RTL/rtl819x-sdk-v1.2/AP/squashfs-tools</tt> is found. After
+copying it somewhere else, the code inside such directory was patched in a 
+similar fashion as SquashFS 2.2-r2.
 
-$ diff -ru squashfs-tools-orig squashfs-tools/
+	$ diff -ru squashfs-tools-orig squashfs-tools/
 	--- squashfs-tools-orig/Makefile	2013-11-10 14:56:41.000000000 +0100
 	+++ squashfs-tools/Makefile	2020-08-17 15:37:34.758142333 +0200
 	@@ -1,7 +1,8 @@

@@ -682,38 +682,38 @@ Still good training time to tackle something else (more to follow)
 
 ## References
 
-1. [Netis WF2419I][1]
+\[1\] [Netis WF2419I][1]
 [1]: http://www.netis-systems.com/Suppory/de_details/id/1/de/181.html
 
-2. [Hacking Reolink Cameras For Fun and Profit][2]
+\[2\] [Hacking Reolink Cameras For Fun and Profit][2]
 [2]: https://www.thirtythreeforty.net/posts/2020/05/hacking-reolink-cameras-for-fun-and-profit/
 
-3. [RTL8196C Datasheet][3]
+\[3\] [RTL8196C Datasheet][3]
 [3]: https://lost-contact.mit.edu/afs/sur5r.net/service/drivers+doc/Realtek/RTL8196C%20Datasheet.pdf
 
-4. [W25Q32FV Datasheet][4]
+\[4\] [W25Q32FV Datasheet][4]
 [4]: https://www.winbond.com/resource-files/w25q32fv%20revi%2010202015.pdf
 
-5. [Bus_Pirate - Dangerous Prototypes][5]
+\[5\] [Bus_Pirate - Dangerous Prototypes][5]
 [5]: http://dangerousprototypes.com/docs/Bus_Pirate
 
-6. [Bus Pirate - flashrom][6]
+\[6\] [Bus Pirate - flashrom][6]
 [6]: https://www.flashrom.org/Bus_Pirate
 
-7. [ISP - flashrom][7]
+\[7\] [ISP - flashrom][7]
 [7]: https://www.flashrom.org/ISP
 
-8. [GitHub - devttys0/sasquatch][8]
+\[8\] [GitHub - devttys0/sasquatch][8]
 [8]: https://github.com/devttys0/sasquatch
 
-9. [squashfs - a compressed fs for Linux - Browse /squashfs at SourceForge.net][9]
-[9]: https://sourceforge.net/projects/squashfs/files/squashfs/
+\[9\] [squashfs - a compressed fs for Linux - Browse /squashfs at SourceForge.net][9]
+[9]: https://sourceforge.net/projects/squashfs/files/squashfs
 
-10. [Official Squashfs LZMA][10]
+\[10\] [Official Squashfs LZMA][10]
 [10]: https://squashfs-lzma.org/
 
-11. [Netis GPL Code][11]
+\[11\] [Netis GPL Code][11]
 [11]: http://www.netis-systems.com/Suppory/gpl.html
 
-12. [TODO https://github.com/][12]
+\[12\] [TODO https://github.com/][12]
 [12]: https://github.com/

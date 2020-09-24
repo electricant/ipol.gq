@@ -484,7 +484,6 @@ files, to get this squashfs-tools version compile on my system the following
 changes need to be applied:
 
 	$ diff -u squashfs2.2-r2/squashfs-tools squashfs-tools
-	
 	--- squashfs2.2-r2/squashfs-tools/Makefile	2005-09-01 01:21:14.000000000 +0200
 	+++ squashfs-tools/Makefile	2020-08-17 14:39:16.792112129 +0200
 	@@ -1,6 +1,7 @@
@@ -622,8 +621,6 @@ similar fashion as SquashFS 2.2-r2.
 	+CFLAGS := -I$(INCLUDEDIR) -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -O2 \
 	+	-fcommon -std=gnu89
 	 
-	 all: mksquashfs mksquashfs-lzma
-	 
 	--- squashfs-tools-orig/mksquashfs.c	2013-11-10 14:56:41.000000000 +0100
 	+++ squashfs-tools/mksquashfs.c	2020-08-17 15:38:32.368332562 +0200
 	@@ -27,6 +27,7 @@
@@ -668,6 +665,11 @@ patches
 compiling stuff and endiannes
 
 stuck! illegal instruction
+
+	# busybox\_p
+	Illegal instruction
+	# telnetd
+	Illegal instruction
 
 flip table and go working to something else
 
@@ -716,5 +718,5 @@ Still good training time to tackle something else (more to follow)
 \[11\] [Netis GPL Code][11]
 [11]: http://www.netis-systems.com/Suppory/gpl.html
 
-\[12\] [TODO https://github.com/][12]
-[12]: https://github.com/
+\[12\] [mkimg.sh on GitHub][12]
+[12]: https://github.com/electricant/netis-wf2419-router-hacking/blob/master/firmware.extracted_new/mkimg.sh

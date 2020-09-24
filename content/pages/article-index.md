@@ -2,7 +2,7 @@
 
 ### August 2020
 
-* [Netis WF2419I Haking](/articles/netis_WF2419I_haking.html)
+* [Netis WF2419I Hacking](/articles/netis_WF2419I_hacking.html)
 
 ### April 2020
 

@@ -2,17 +2,20 @@
 
 ## Introduction
 
-I had an old (2014-ish) Netis WF2419I [\[1\]][1] router collecting dust in a
-cabinet at home. Its performance has always been lackluster with the WiFi
-connection dropping and restarting every few minutes. I bought it to serve as a
-guest AP for my dorm while I was studying in Padova. After I moved I've never
-used it any more and switched to a whole different setup (which I hope to
-describe in another post).
+I had an old (2014-ish) and cheap (if I recall correctly it cost me around 15-20
+€) Netis WF2419I [\[1\]][1] router collecting dust in a cabinet at home. Its
+performance has always been lackluster with the WiFi connection dropping and
+restarting every few minutes. I bought it to serve as a guest AP for my dorm
+while I was studying in Padova. It worked dutifully for a few years there but, 
+after I moved, I've never used it any more and switched to a whole different
+setup (which I hope to describe in another post) with more powerful hardware.
 
 This router was almost forgotten, until I read an excellent article by George
-Hilliard [\[2\]][2] about hacking Reolink cameras. This was enough to spark my
-interest in trying to reverse engineer and add as much new functionality as
-possible to this old (and somewhat crappy) piece of hardware.
+Hilliard [\[2\]][2] about hacking Reolink cameras. I had no plans to use this 
+device in any case, given that it is rather old and crappy. So reading the
+article was enough to spark my interest in trying to reverse engineer and add
+as much new functionality as possible to this piece of hardware (or I should say
+"junk"?). It surely won't be missed if something goes wrong in the process.
 
 First off let's set some goals to keep us on track:
  * Open the router and identify chipset, RAM, FLASH size and serial port
@@ -27,46 +30,75 @@ spare any of the details, including the __MANY__ failed attempts. That's why
 I'm calling this page a diary.
 
 At the time of writing I'm quite far from completion. Depending how long this
-grows I might decide to split this post into a series.
+grows I might decide to split this post into a series. Code and raw notes are
+available on [GitHub](https://github.com/electricant/netis-wf2419-router-hacking).
 
 ## Opening up the Device & Talking to the Serial Port
 
-This is the easy part. Just remove the two screws on the bottom side (one is
-hidden by the mandatory 'warranty void if seal is broken' sticker, about which I
-couldn't care less) and pop open the case.
+This is the easy part. Actually, before rushing to the screwdriver to open the
+chassis, we search for the FCC ID of the device on the back of the unit. Every
+RF device needs to be FCC certified to be sold and imported in the US [\[3\]][3]
+and this router is no exception. On the lower-right corner of the label we can
+read the FCC ID: <tt>T58WF2419R</tt>. By searching for this ID on the [official
+FCC website](https://www.fcc.gov/oet/ea/fccid) or on
+[fccid.io](https://fccid.io/T58WF2419R) we already have access to many low-level
+details about the router, including internal photos.
 
-The following components appear before us onto the sea of green of the board:
+<figure>
+<a href="/res/img/wf2419_hacking/fcc_id_label.jpg">
+	<img src="/res/img/wf2419_hacking/fcc_id_label.jpg"/>
+</a>
+<figcaption>The FCC ID as seen on the label.</figcaption>
+</figure>
+
+Stop wandering around the FCC website reading test reports! To access the flash
+chip we need to open the device anyway. So, just remove the two screws on the
+bottom side (one is hidden by the mandatory 'warranty void if seal is broken'
+sticker, about which I couldn't care less) and pop open the case.
+
+The following components appear before us onto the sea of green of the board and
+are highlighted in the picture below:
  * Realtek RTL8196C - the main router chipset
  * Realtek RTL8192CE - WiFi chipset
  * Winbond W25Q32FV - 32Mbit (4MB) SPI FLASH memory
  * ESMT M12L128168A - 2M x 16 Bit x 4 Banks (16MB) SDRAM
  * A few test points, probably for JTAG and UART access
 
-As a first step let's look up on our favourite search engine for the main router
-chipset datasheet. And sure enough somebody (thank you!) released a confidential
-copy for us to read [\[3\]][3]. Let's neglect all the other details for the
-moment and scroll right-ahead to the pinout. Remember we are looking for a
-serial port.
-
 <figure>
-	<a href="/res/img/wf2419_hacking/chipset_pinout.png">
-		<img src="/res/img/wf2419_hacking/chipset_pinout.png"/>
-	</a>
-	<figcaption>Realtek RTL8196C chipset pinout.</figcaption>
+<a href="/res/img/wf2419_hacking/components_labelled.jpg">
+	<img src="/res/img/wf2419_hacking/components_labelled.jpg"/>
+</a>
+<figcaption>Router board with main components labelled.</figcaption>
 </figure>
 
-And sure enough here it is! Look at the above picture. In the bottom-right part
-we have two pins (pin 36 and 37) labelled <tt>UART_RX/GPIOA7</tt> and
-<tt>UART_TX/GPIOB0</tt>. With a multimeter those two pins are tracked to the
-unpopulated header labelled <tt>J1</tt>. Time to solder a pin header and connect
-a TTL to USB adapter. But HEI! Wait! What's the baud rate? A quick check with an
-oscilloscope (some trial and error works too) revealed it's <tt>38400bps</tt>.
+As a first step we could see if a serial port is exposed somewhere on the board
+in order to have access to a shell on the device. Let's look up on our favourite
+search engine for the main router chipset datasheet. Here we are! Somebody
+(thank you!) released a confidential copy for us to read [\[4\]][4]. Let's
+neglect all the other details for the moment and scroll right-ahead to the
+pinout. Remember we are looking for a serial port.
 
 <figure>
-	<a href="/res/img/wf2419_hacking/pin_header.jpg">
-		<img src="/res/img/wf2419_hacking/pin_header.jpg"/>
-	</a>
-	<figcaption>Pin header soldered to <tt>J1</tt>.</figcaption>
+<a href="/res/img/wf2419_hacking/chipset_pinout.png">
+		<img src="/res/img/wf2419_hacking/chipset_pinout.png"/>
+</a>
+<figcaption>Realtek RTL8196C chipset pinout.</figcaption>
+</figure>
+
+Look at the above picture. In the bottom-right part we have two pins (pin 36 and
+37) labelled <tt>UART\_RX/GPIOA7</tt> and <tt>UART\_TX/GPIOB0</tt> respectively.
+By tracing those two pins with a multimeter we get to the unpopulated header 
+labelled <tt>J1</tt>. Time to solder a pin header and connect a TTL to USB 
+adapter and see who's there. But HEI! Wait! What's the baud rate? A quick check
+with an oscilloscope revealed it's <tt>38400bps</tt>. I know using an
+oscilloscope for this task it's a bit of an overkill, some trial and error works
+too.
+
+<figure>
+<a href="/res/img/wf2419_hacking/pin_header.jpg">
+	<img src="/res/img/wf2419_hacking/pin_header.jpg"/>
+</a>
+<figcaption>Pin header soldered to <tt>J1</tt>.</figcaption>
 </figure>
 
 After connecting a TTL to serial adapter and issuing
@@ -254,8 +286,8 @@ and see what we obtain by dumping the contents of the flash.
 ## Dumping The Flash Contents
 
 The flash chip was already identified by visual inspection to be a Winbond 
-W25Q32FV chip. Time to download its datasheet [\[4]][4] to get the pinout and
-connect it to our beloved Bus Pirate [\[5]][5].
+W25Q32FV chip. Time to download its datasheet [\[5\]][5] to get the pinout and
+connect it to our beloved Bus Pirate [\[6\]][6].
 
 <figure>
 	<a href="/res/img/wf2419_hacking/flash_pinout.gif">
@@ -265,15 +297,15 @@ connect it to our beloved Bus Pirate [\[5]][5].
 </figure>
 
 Now that we know the pinout let's figure out how to connect the chip for using
-<tt>flashrom</tt> [\[6]][6] on it. I'll try In-System Programming (ISP)
-[\[7]][7] first since it is much quicker. If this won't work the only solution
+<tt>flashrom</tt> [\[7\]][7] on it. I'll try In-System Programming (ISP)
+[\[8\]][8] first since it is much quicker. If this won't work the only solution
 is to desolder and resolder the flash chip from the board every time we have to
 read or program it. This is time consuming and I'd like to avoid it at all cost.
 
 A quick reverse engineering of the traces around the chip revealed that pin 3 
 and pin 7 (<tt>/WP</tt> and <tt>/HOLD</tt> respectively) which, according to
-[\[6]][6] should be connected to 3.3V on the bus pirate, are already tied to the
-VCC pin (pin 8). Therefore, only 6 out of 8 wires have to be connected.
+[\[7\]][7] should be connected to 3.3V on the bus pirate, are already tied to
+the VCC pin (pin 8). Therefore, only 6 out of 8 wires have to be connected.
 
 Let's get back to our trusty soldering iron. Twenty minutes later, with a piece
 of an old ATA cable (the 80-wire version which uses smaller conductors) we have
@@ -322,7 +354,7 @@ Apparently sasquatch is not installed in my system and
 <tt>$ sudo apt search sasquatch</tt> does not return any result. Alright it's
 not the first time I have to compile and install something from source on my
 system. It's strange however that the Debian repos are missing this useful piece
-of software. Sasquatch is downloaded from [\[8\]][8] and <tt>build.sh</tt> does
+of software. Sasquatch is downloaded from [\[9\]][9] and <tt>build.sh</tt> does
 all the requisite stuff for building and installing.
 
 Obviously this is not so easy. The building fails with a ton of messages like 
@@ -478,10 +510,10 @@ mount the root file system.
 
 Of course it cannot be so easy. Can we install a different version of
 squashfs-tools from the Debian repos? Of course not. We have to compile our own.
-The first thing I did was to download from sourceforge [\[9\]][9] the squashfs
-sources for version 2.2-r2. Due to different gcc behaviour and different header
-files, to get this squashfs-tools version compile on my system the following
-changes need to be applied:
+The first thing I did was to download from sourceforge the squashfs sources
+[\[10\]][10] for version 2.2-r2. Due to different gcc behaviour and different
+header files, to get this squashfs-tools version compile on my system the
+following changes need to be applied:
 
 	$ diff -u squashfs2.2-r2/squashfs-tools squashfs-tools
 	--- squashfs2.2-r2/squashfs-tools/Makefile	2005-09-01 01:21:14.000000000 +0200
@@ -506,8 +538,9 @@ changes need to be applied:
 	 #include <fcntl.h>
 	 #include <errno.h>
 
-Now that a working copy of mksquashfs version 2 is obtained we can try to
-rebuild the file system.
+Figuring out why the code was not building and what to do to make gcc accept it
+took me quite a while. However, now that a working copy of mksquashfs version 2
+is obtained we can try to rebuild the file system.
 
 	$ squashfs/squashfs2.2-r2/squashfs-tools/mksquashfs squashfs-root D0000.new.squashfs -b 65536 -all-root -noappend -2.0 -be
 
@@ -598,8 +631,8 @@ flash image size confirms that the new image is not too big to fit in the flash
 chip. What is still missing is the correct compression algorithm. By looking at
 the output above we see that lzma-adaptive compression was detected. Version 2.2
 of mksquashfs does not support lzma compression by default. A working copy of
-squashfs-lzma [\[10\]][10] is needed. But I was fed up of blindly trying stuff
-until something works, so I downloaded the GPL code [\[11\]][11] (thanks Richard
+squashfs-lzma [\[11\]][11] is needed. But I was fed up of blindly trying stuff
+until something works, so I downloaded the GPL code [\[12\]][12] (thanks Richard
 Stallman) for my router model and started inspecting the package contents to
 find some clues about how the flash image is built. 
 
@@ -651,8 +684,8 @@ webpage.
 </figure>
 
 Hurray! We can now do whatever we want with the root file system! To avoid
-manually entering a series of commands to build the new image, I created a small
-script available on GitHub [\[12\]][12].
+manually entering a series of commands every time I want to build a new image,
+I created a small script available on GitHub [\[13\]][13].
 
 ## Compiling Software and More Roadblocks
 
@@ -691,32 +724,35 @@ Still good training time to tackle something else (more to follow)
 \[2\] [Hacking Reolink Cameras For Fun and Profit][2]
 [2]: https://www.thirtythreeforty.net/posts/2020/05/hacking-reolink-cameras-for-fun-and-profit/
 
-\[3\] [RTL8196C Datasheet][3]
-[3]: https://lost-contact.mit.edu/afs/sur5r.net/service/drivers+doc/Realtek/RTL8196C%20Datasheet.pdf
+\[3\] [FCC Equipment Authorization Procedures][3]
+[3]: https://www.fcc.gov/general/equipment-authorization-procedures 
 
-\[4\] [W25Q32FV Datasheet][4]
-[4]: https://www.winbond.com/resource-files/w25q32fv%20revi%2010202015.pdf
+\[4\] [RTL8196C Datasheet][4]
+[4]: https://lost-contact.mit.edu/afs/sur5r.net/service/drivers+doc/Realtek/RTL8196C%20Datasheet.pdf
 
-\[5\] [Bus Pirate - Dangerous Prototypes][5]
-[5]: http://dangerousprototypes.com/docs/Bus_Pirate
+\[5\] [W25Q32FV Datasheet][5]
+[5]: https://www.winbond.com/resource-files/w25q32fv%20revi%2010202015.pdf
 
-\[6\] [Bus Pirate - flashrom][6]
-[6]: https://www.flashrom.org/Bus_Pirate
+\[6\] [Bus Pirate - Dangerous Prototypes][6]
+[6]: http://dangerousprototypes.com/docs/Bus_Pirate
 
-\[7\] [ISP - flashrom][7]
-[7]: https://www.flashrom.org/ISP
+\[7\] [Bus Pirate - flashrom][7]
+[7]: https://www.flashrom.org/Bus_Pirate
 
-\[8\] [GitHub - devttys0/sasquatch][8]
-[8]: https://github.com/devttys0/sasquatch
+\[8\] [ISP - flashrom][8]
+[8]: https://www.flashrom.org/ISP
 
-\[9\] [squashfs - a compressed fs for Linux - Browse /squashfs at SourceForge.net][9]
-[9]: https://sourceforge.net/projects/squashfs/files/squashfs
+\[9\] [GitHub - devttys0/sasquatch][9]
+[9]: https://github.com/devttys0/sasquatch
 
-\[10\] [Official Squashfs LZMA][10]
-[10]: https://squashfs-lzma.org/
+\[10\] [squashfs - a compressed fs for Linux - Browse /squashfs at SourceForge.net][10]
+[10]: https://sourceforge.net/projects/squashfs/files/squashfs
 
-\[11\] [Netis GPL Code][11]
-[11]: http://www.netis-systems.com/Suppory/gpl.html
+\[11\] [Official Squashfs LZMA][11]
+[11]: https://squashfs-lzma.org/
 
-\[12\] [mkimg.sh on GitHub][12]
-[12]: https://github.com/electricant/netis-wf2419-router-hacking/blob/master/firmware.extracted_new/mkimg.sh
+\[12\] [Netis GPL Code][12]
+[12]: http://www.netis-systems.com/Suppory/gpl.html
+
+\[13\] [mkimg.sh on GitHub][13]
+[13]: https://github.com/electricant/netis-wf2419-router-hacking/blob/master/firmware.extracted_new/mkimg.sh

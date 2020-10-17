@@ -14,8 +14,9 @@ This router was almost forgotten, until I read an excellent article by George
 Hilliard [\[2\]][2] about hacking Reolink cameras. I had no plans to use this 
 device in any case, given that it is rather old and crappy. So reading the
 article was enough to spark my interest in trying to reverse engineer and add
-as much new functionality as possible to this piece of hardware (or I should say
-"junk"?). It surely won't be missed if something goes wrong in the process.
+as much new functionality as possible to this piece of hardware (or, perhaps,
+should I say "junk"?). It surely won't be missed if something goes wrong in the
+process.
 
 First off let's set some goals to keep us on track:
  * Open the router and identify chipset, RAM, FLASH size and serial port
@@ -30,17 +31,18 @@ spare any of the details, including the __MANY__ failed attempts. That's why
 I'm calling this page a diary.
 
 At the time of writing I'm quite far from completion. Depending how long this
-grows I might decide to split this post into a series. Code and raw notes are
-available on [GitHub](https://github.com/electricant/netis-wf2419-router-hacking).
+page grows I might decide to split this post into a series. Code and raw notes
+are available on
+[GitHub](https://github.com/electricant/netis-wf2419-router-hacking).
 
 ## Opening up the Device & Talking to the Serial Port
 
 This is the easy part. Actually, before rushing to the screwdriver to open the
-chassis, we search for the FCC ID of the device on the back of the unit. Every
-RF device needs to be FCC certified to be sold and imported in the US [\[3\]][3]
-and this router is no exception. On the lower-right corner of the label we can
-read the FCC ID: <tt>T58WF2419R</tt>. By searching for this ID on the [official
-FCC website](https://www.fcc.gov/oet/ea/fccid) or on
+chassis, we can search for the FCC ID of the device on the back of the unit.
+Every RF device needs to be FCC certified to be sold and imported in the US
+[\[3\]][3] and this router is no exception. On the lower-right corner of the
+label we can read the FCC ID: <tt>T58WF2419R</tt>. By searching for this ID on
+the [official FCC website](https://www.fcc.gov/oet/ea/fccid) or on
 [fccid.io](https://fccid.io/T58WF2419R) we already have access to many low-level
 details about the router, including internal photos.
 
@@ -48,16 +50,17 @@ details about the router, including internal photos.
 <a href="/res/img/wf2419_hacking/fcc_id_label.jpg">
 	<img src="/res/img/wf2419_hacking/fcc_id_label.jpg"/>
 </a>
-<figcaption>The FCC ID as seen on the label.</figcaption>
+<figcaption>The FCC ID, as seen on the label.</figcaption>
 </figure>
 
-Stop wandering around the FCC website reading test reports! To access the flash
-chip we need to open the device anyway. So, just remove the two screws on the
-bottom side (one is hidden by the mandatory 'warranty void if seal is broken'
-sticker, about which I couldn't care less) and pop open the case.
+Stop wandering around the FCC website reading test reports! Given my goals,
+access to the flash chip is needed so I have to open the device anyway. This was
+as easy as just removing the two screws on the bottom side (one is hidden by the
+mandatory 'warranty void if seal is broken' sticker, about which I couldn't care
+less) and popping open the case.
 
-The following components appear before us onto the sea of green of the board and
-are highlighted in the picture below:
+With the case open, the following components appear before us onto the sea of
+green of the board and are highlighted in the picture below:
  * Realtek RTL8196C - the main router chipset
  * Realtek RTL8192CE - WiFi chipset
  * Winbond W25Q32FV - 32Mbit (4MB) SPI FLASH memory
@@ -71,28 +74,34 @@ are highlighted in the picture below:
 <figcaption>Router board with main components labelled.</figcaption>
 </figure>
 
-As a first step we could see if a serial port is exposed somewhere on the board
-in order to have access to a shell on the device. Let's look up on our favourite
-search engine for the main router chipset datasheet. Here we are! Somebody
-(thank you!) released a confidential copy for us to read [\[4\]][4]. Let's
-neglect all the other details for the moment and scroll right-ahead to the
-pinout. Remember we are looking for a serial port.
+The usual first step is to see if a serial port is exposed somewhere on the
+board in order to have access to a shell on the device. As shown in the picture
+above, just by looking at the board, I already identified a few suitable
+testpoints. Just to be sure and also for future use, let's look up on our
+favourite search engine for the main router chipset datasheet. As expected,
+somebody (thank you!) released a confidential copy for us to read [\[4\]][4].
+Let's neglect all the other details for the moment and scroll right-ahead to the
+pinout: we are looking for a serial port.
 
 <figure>
 <a href="/res/img/wf2419_hacking/chipset_pinout.png">
 		<img src="/res/img/wf2419_hacking/chipset_pinout.png"/>
 </a>
-<figcaption>Realtek RTL8196C chipset pinout.</figcaption>
+<figcaption>
+	Realtek RTL8196C chipset pinout with serial port pins highlighted.
+</figcaption>
 </figure>
 
-Look at the above picture. In the bottom-right part we have two pins (pin 36 and
-37) labelled <tt>UART\_RX/GPIOA7</tt> and <tt>UART\_TX/GPIOB0</tt> respectively.
-By tracing those two pins with a multimeter we get to the unpopulated header 
-labelled <tt>J1</tt>. Time to solder a pin header and connect a TTL to USB 
-adapter and see who's there. But HEI! Wait! What's the baud rate? A quick check
-with an oscilloscope revealed it's <tt>38400bps</tt>. I know using an
-oscilloscope for this task it's a bit of an overkill, some trial and error works
-too.
+Look at the above picture. In the bottom-right part there are two pins (pin 36
+and 37) labelled <tt>UART\_RX/GPIOA7</tt> and <tt>UART\_TX/GPIOB0</tt>
+respectively. Those pins can be configured either as GPIOs (for controlling the
+router LEDs etc.) or as a serial port. I traced those two pins with a multimeter
+and they are routed to the unpopulated header labelled <tt>J1</tt>. Most likely,
+they are the serial port I'm looking for. Time to solder a pin header and
+connect a TTL to USB adapter and see who's there. But HEI! Wait! What's the baud
+rate? A quick check with an oscilloscope revealed it's <tt>38400bps</tt>. I know
+using an oscilloscope for this task it's a bit of an overkill, but I had one on
+hand so why not using it? By the way, some trial and error works too.
 
 <figure>
 <a href="/res/img/wf2419_hacking/pin_header.jpg">
@@ -105,7 +114,7 @@ After connecting a TTL to serial adapter and issuing
 	
 	$ screen -L /dev/ttyUSB0 38400
 	
-When we start the router we get the following messages:
+When the router boots get the following messages appear on my terminal:
 	
 	=============================
 	
@@ -223,7 +232,7 @@ When we start the router we get the following messages:
 
 	#
 
-Looks like we have a root command prompt. Let's try some commands:
+Good. Looks like we have a root command prompt. Let's try some commands:
 
 	# ls
 	bin		etc		media		sbin		tmp		var
@@ -280,45 +289,52 @@ Looks like we have a root command prompt. Let's try some commands:
 
 Quite an ancient software stack. Isn't it?
 
-Now that we have grabbed some basic information about the system let's move on
-and see what we obtain by dumping the contents of the flash.
+Now that I have grabbed some basic information about the system it's time to
+move on and see what's inside the flash chip.
 
 ## Dumping The Flash Contents
 
-The flash chip was already identified by visual inspection to be a Winbond 
-W25Q32FV chip. Time to download its datasheet [\[5\]][5] to get the pinout and
-connect it to our beloved Bus Pirate [\[6\]][6].
+I had already identified the chip by visual inspection while opening the router:
+it is a Winbond W25Q32FV chip. Time to download its datasheet [\[5\]][5] to get
+the pinout and connect it to our beloved Bus Pirate [\[6\]][6]. The Bus Pirate
+is a small and useful board to talk to and interact with digital stuff. Out of
+the box it supports the following interfaces: 1-Wire, 2-Wire, 3-Wire, I2C, SPI,
+JTAG, UART and LCD. Alternatively the GPIO pins can be directly controlled and
+many more protocols can be added using aftermarket firmware images since it is
+all open source.
 
 <figure>
-	<a href="/res/img/wf2419_hacking/flash_pinout.gif">
-		<img src="/res/img/wf2419_hacking/flash_pinout.gif"/>
-	</a>
-	<figcaption>Winbond W25Q32FV flash chip pinout.</figcaption>
+<a href="/res/img/wf2419_hacking/flash_pinout.gif">
+	<img src="/res/img/wf2419_hacking/flash_pinout.gif"/>
+</a>
+<figcaption>Winbond W25Q32FV flash chip pinout.</figcaption>
 </figure>
 
-Now that we know the pinout let's figure out how to connect the chip for using
-<tt>flashrom</tt> [\[7\]][7] on it. I'll try In-System Programming (ISP)
-[\[8\]][8] first since it is much quicker. If this won't work the only solution
-is to desolder and resolder the flash chip from the board every time we have to
-read or program it. This is time consuming and I'd like to avoid it at all cost.
+Now that I know the pinout of the chip, I have to figure out how to connect it
+for <tt>flashrom</tt> [\[7\]][7] to read it. I'll try In-System Programming
+(ISP) [\[8\]][8] first since it is much quicker and does not require reworking
+the board every time I have to read or write the flash. If this won't work the
+only solution is to desolder and resolder the flash chip from the board every
+time. This is time consuming and I'd like to avoid it at all cost.
 
 A quick reverse engineering of the traces around the chip revealed that pin 3 
 and pin 7 (<tt>/WP</tt> and <tt>/HOLD</tt> respectively) which, according to
 [\[7\]][7] should be connected to 3.3V on the bus pirate, are already tied to
-the VCC pin (pin 8). Therefore, only 6 out of 8 wires have to be connected.
+the VCC pin (pin 8). Therefore, only 6 out of the 8 required wires have to be
+connected.
 
-Let's get back to our trusty soldering iron. Twenty minutes later, with a piece
-of an old ATA cable (the 80-wire version which uses smaller conductors) we have
-a nice little connector ready to be plugged into the Bus Pirate socket.
+Twenty minutes with my trusty soldering iron and a piece of an old ATA cable
+(the 80-wire version which uses smaller conductors) and I have created a nice
+little connector ready to be plugged into the Bus Pirate socket.
 
 <figure>
-	<a href="/res/img/wf2419_hacking/flash_buspirate.jpg">
-		<img src="/res/img/wf2419_hacking/flash_buspirate.jpg"/>
-	</a>
-	<figcaption>Bus Pirate ISP connection to the flash chip.</figcaption>
+<a href="/res/img/wf2419_hacking/flash_buspirate.jpg">
+	<img src="/res/img/wf2419_hacking/flash_buspirate.jpg"/>
+</a>
+<figcaption>Bus Pirate ISP connection to the flash chip.</figcaption>
 </figure>
 
-To check for a successful connection the following command was issued:
+To check for a successful connection I issued the following command:
 
 	$ sudo flashrom -p buspirate_spi:dev=/dev/ttyUSB0,spispeed=2M
 	[sudo] password for pol: 
@@ -333,9 +349,10 @@ Hurray! The flash chip was recognized correctly. Time to dump its contents.
 	
 	$ sudo flashrom -p buspirate_spi:dev=/dev/ttyUSB0,spispeed=2M -r firmware_orig.bin
 
-Let's now extract the contents of the dump recursively to see what's inside. At
-the end of the process we should have a folder named 
-<tt>\_firmware\_orig.bin.extracted</tt>.
+To see what's inside the image named <tt>firmware\_orig.bin</tt> I extracted it
+recursively with the following command. At the end of the process binwalk
+creates a folder named <tt>\_firmware\_orig.bin.extracted</tt> containing the
+files extracted from the various file systems it found.
 
 	$ binwalk -e firmware_orig.bin 
 
@@ -349,25 +366,25 @@ the end of the process we should have a folder named
 	WARNING: Extractor.execute failed to run external extractor 'sasquatch -p 1 -be -d 'squashfs-root' '%e'': [Errno 2] No such file or directory: 'sasquatch', 'sasquatch -p 1 -be -d 'squashfs-root' '%e'' might not be installed correctly
 	851968        0xD0000         Squashfs filesystem, big endian, version 2.0, size: 2076096 bytes, 389 inodes, blocksize: 65536 bytes, created: 2015-06-30 08:57:47
 
-What are those warnings and why is my folder <tt>squashfs-root</tt> empty?
-Apparently sasquatch is not installed in my system and
-<tt>$ sudo apt search sasquatch</tt> does not return any result. Alright it's
-not the first time I have to compile and install something from source on my
-system. It's strange however that the Debian repos are missing this useful piece
-of software. Sasquatch is downloaded from [\[9\]][9] and <tt>build.sh</tt> does
-all the requisite stuff for building and installing.
+Or that was the expectation. What are those warnings and why is my folder
+<tt>squashfs-root</tt> empty?  Apparently sasquatch is not installed in my
+system and <tt>$ sudo apt search sasquatch</tt> does not return any result.
+Alright it's not the first time I have to compile and install something from
+source on my system. It's strange however that the Debian repos are missing this
+useful piece of software. Sasquatch is downloaded from [\[9\]][9] and
+<tt>build.sh</tt> does all the requisite stuff for building and installing.
 
-Obviously this is not so easy. The building fails with a ton of messages like 
-the following:
+As usual, the process is never as easy as running a single command. The
+building fails with a ton of messages like the following:
 
 	/usr/bin/ld: unsquashfs_xattr.o:/tmp/article/sasquatch/squashfs4.3/squashfs-tools/error.h:34: multiple definition of `verbose'; unsquashfs.o:/tmp/article/sasquatch/squashfs4.3/squashfs-tools/error.h:34: first defined here
 	collect2: error: ld returned 1 exit status
 	make: *** [Makefile:298: sasquatch] Error 1
 
-By looking at the issues and pull requests
-[pull request #34](https://github.com/devttys0/sasquatch/pull/34) is found. We
-apply it to our copy of the code and the compilation is successful. We are ready
-to go ahead with our extraction.
+By looking at the issues and pull requests of sasquatch I found
+[pull request #34](https://github.com/devttys0/sasquatch/pull/34). After
+applying it to my local copy of the code the compilation is successful. I'm now
+ready to go ahead with the extraction.
 
 	$ binwalk -eM firmware_orig.bin 
 
@@ -405,12 +422,13 @@ to go ahead with our extraction.
 	1947112       0x1DB5E8        Unix path: /usr/lib/libc.so.1
 
 Great. The image contains some LZMA compressed data, probably kernel and
-bootloader, and a squashfs file system. Conveniently binwalk will extract those
-files for us and sure enough we get a kernel (version 2.4.18 of course), some
-certificates and the contents of our root file system which we are now able to
-inspect and modify. The expert reader may already have noticed the first mistake
-here. If nothing above looks wrong fasten your seat belt we're going deep down a
-rabbit hole.
+bootloader, and a squashfs file system [\[10\]][10]. Conveniently binwalk will
+recursively extract those files and what I got was a kernel (version 2.4.18 of 
+course), some certificates and the contents of the root file system which I am
+now able to inspect and modify as I please. The expert reader (or my future self
+if he learned something from this endeavour) may already have noticed the first
+mistake here. If nothing above looks wrong fasten your seat belt we're going
+deep down a rabbit hole.
 
 ## Rebuilding the Flash Image and First Roadblocks
 
@@ -432,10 +450,11 @@ This is the root folder structure of the extracted image:
 	drwxr-xr-x 8 pol pol  300 Jun 30  2015 web
 	
 The easiest thing to do is modifying the index.htm of the router configuration
-webpage adding some test code just to see if everything worked. The directory
-<tt>firmware_orig.bin.extracted</tt> and its content was copied to
-<tt>firmware.extracted_new</tt> to preserve the original files. Then 
-<tt>firmware.extracted_new/squashfs-root/web/index.htm</tt> was modified by
+webpage adding some test code just to see if everything in the process of
+extraction and rebuilding worked. I copied the directory
+<tt>firmware_orig.bin.extracted</tt> and its contents to
+<tt>firmware.extracted_new</tt> in order to preserve the original files. Then I
+modified <tt>firmware.extracted_new/squashfs-root/web/index.htm</tt> by
 appending the following lines just before the closing html tag.
 	
 	<script>
@@ -444,10 +463,10 @@ appending the following lines just before the closing html tag.
 
 This should display an alert window as soon as the page is loaded.
 
-Save and close. Now it's time to rebuild the image and see if it boots. Let's
-have more details about the file system type before attempting to re-create it.
+Save and close. Now it's time to rebuild the image and see if it boots. But
+before attempting to re-create it, I need more details about the file system.
 	
-	$ unsquashfs -s D0000.squashfs 
+	$ unsquashfs -s D0000.squashfs
 	Reading a different endian SQUASHFS filesystem on D0000.squashfs
 	Found a valid big endian SQUASHFS 2:0 superblock on D0000.squashfs.
 	Creation or last append time Tue Jun 30 10:57:47 2015
@@ -461,14 +480,15 @@ have more details about the file system type before attempting to re-create it.
 	Check data is not present in the filesystem
 	Duplicates are removed
 	Number of fragments 27
-	Number of inodes 389
-	Number of uids 1
+	Number of inodes 389 
+	umber of uids 1
 	Number of gids 0	
 
 ### The Easy Way
 
-The first attempt was done using the version of squashfs-tools provided by the
-Debian packages (version 4.4 at the time of writing).
+The first root file system creation attempt was done using the version of 
+squashfs-tools provided by the Debian packages (version 4.4 at the time of
+writing).
 
 	$ mksquashfs squashfs-root D0000.new.squashfs -b 65536 -all-root -noappend
 
@@ -490,8 +510,8 @@ Debian packages (version 4.4 at the time of writing).
 	Number of inodes 366
 	Number of ids 1
 
-Apart for the different superblock version we have that the file system size is
-bigger, the endiannes is gone and the number of inodes is lower than the
+Apart from the different superblock version, we have that the file system size
+is bigger, the endiannes is gone and the number of inodes is lower than the
 original image. What is going on? I decided to tackle one issue at a time.
 
 First of all is the squashfs file system backwards-compatible? Apparently
@@ -503,17 +523,21 @@ of science I decided to find it out the hard way.
 	$ dd if=D0000.new.squashfs of=firmware_pwned.bin bs=1 seek=$((0xD0000)) conv=notrunc
 	$ sudo flashrom -p buspirate_spi:dev=/dev/ttyUSB0,spispeed=2M -w firmware.extracted_new/firmware_pwned.bin 
 
-And sure enough when the router is turned on it is stuck in a bootloop unable to
-mount the root file system.
+And sure enough when I turned on the router, carefully monitoring the serial 
+output, the device is unable to mount the root file system and is stuck in a
+bootloop.
 
 ### The Hard Way
 
-Of course it cannot be so easy. Can we install a different version of
-squashfs-tools from the Debian repos? Of course not. We have to compile our own.
-The first thing I did was to download from sourceforge the squashfs sources
-[\[10\]][10] for version 2.2-r2. Due to different gcc behaviour and different
-header files, to get this squashfs-tools version compile on my system the
-following changes need to be applied:
+Of course it could not be so easy. We need an older version of squashfs,
+supporting setting a different endiannes. Is there a different/lower version of
+squashfs-tools in the Debian repos? Of course not. I have to compile my own. Who
+cares I'm already used to that. The first thing I did was to download the
+[squashfs sources for version 2.2-r2](https://sourceforge.net/projects/squashfs/files/squashfs/squashfs2.2-r2/).
+And once again the stock sources cannot be compiled with gcc 10. I learned, 
+after trial and error, that this is due to different gcc behaviour and
+due to some symbols moved to different header files. To get this squashfs-tools
+version compile on my system I had to apply the following changes:
 
 	$ diff -u squashfs2.2-r2/squashfs-tools squashfs-tools
 	--- squashfs2.2-r2/squashfs-tools/Makefile	2005-09-01 01:21:14.000000000 +0200
@@ -539,8 +563,8 @@ following changes need to be applied:
 	 #include <errno.h>
 
 Figuring out why the code was not building and what to do to make gcc accept it
-took me quite a while. However, now that a working copy of mksquashfs version 2
-is obtained we can try to rebuild the file system.
+took me quite a while. However, now that I have a working copy of mksquashfs 
+version 2, I can try to rebuild the file system:
 
 	$ squashfs/squashfs2.2-r2/squashfs-tools/mksquashfs squashfs-root D0000.new.squashfs -b 65536 -all-root -noappend -2.0 -be
 
@@ -564,8 +588,8 @@ is obtained we can try to rebuild the file system.
 
 The issue about endiannes and superblock version are solved. There is still a
 different number of inodes and a bigger file system size. But hey, who cares
-right? The steps in the previous section to create a new flash image and put it
-on the router are followed but the router is still stuck in a boot loop.
+right? I flashed it into the router right-away, repeating the steps in the
+previous section, but the device is still stuck in a boot loop.
 
 What are those missing inodes anyway? Maybe extracting the SquashFS file system
 manually will yield more information.
@@ -601,9 +625,10 @@ image. Let's do the same
 	created 0 fifos
 
 This was one of those moments when you realize you were barking up the wrong
-tree all the time. Facepalm. The missing inodes are the character devices. Of
-course nothing will boot! Binwalk did not have the required permissions to
-create them. We have to extract the file system as root:
+tree all the time. Facepalm. The missing inodes are the character devices
+[\[11\]][11]. Of course nothing will boot! Upon extraction, binwalk did not
+have the required permissions to create such files. I have to extract the file
+system as root to get the whole contents of the image:
 
 	$ sudo sasquatch D0000.squashfs 
 	[sudo] password for pol: 
@@ -624,24 +649,24 @@ create them. We have to extract the file system as root:
 	created 23 devices
 	created 0 fifos
 
-Now we are talking! Well... not really. If we rebuild the file system once again
-as we did before, the only difference now is file system size. However, the
+Now we are talking! Well... not really. If I rebuild the file system once again
+as I did before, the only difference now is file system size. However, the
 router is still stuck in a bootloop. A quick check to the size of the final
 flash image size confirms that the new image is not too big to fit in the flash
 chip. What is still missing is the correct compression algorithm. By looking at
 the output above we see that lzma-adaptive compression was detected. Version 2.2
 of mksquashfs does not support lzma compression by default. A working copy of
-squashfs-lzma [\[11\]][11] is needed. But I was fed up of blindly trying stuff
-until something works, so I downloaded the GPL code [\[12\]][12] (thanks Richard
+squashfs-lzma [\[12\]][12] is needed. But I was fed up of blindly trying stuff
+until something works, so I downloaded the GPL code [\[13\]][13] (thanks Richard
 Stallman) for my router model and started inspecting the package contents to
 find some clues about how the flash image is built. 
 
 ### GPL Code is Fun
 
-Inside the package the directory
-<tt>GPL\_Code\_RTL/rtl819x-sdk-v1.2/AP/squashfs-tools</tt> is found. After
-copying it somewhere else, the code inside such directory was patched in a 
-similar fashion as SquashFS 2.2-r2.
+Inside the package I found the directory
+<tt>GPL\_Code\_RTL/rtl819x-sdk-v1.2/AP/squashfs-tools</tt> . After copying it
+somewhere else to preserve the original files, I had to patch the code inside
+the new directory in a similar fashion as SquashFS 2.2-r2.
 
 	$ diff -ru squashfs-tools-orig squashfs-tools/
 	--- squashfs-tools-orig/Makefile	2013-11-10 14:56:41.000000000 +0100
@@ -665,16 +690,15 @@ similar fashion as SquashFS 2.2-r2.
 	 #include <fcntl.h>
 	 #include <errno.h>
 
-The sources are compiled with <tt>make</tt> and we are left with
-<tt>mksquashfs-lzma</tt> which can be used to build the new file system as
-usual.
+After that, I compiled the sources with <tt>make</tt> and I got a fancy new
+executable to play with: <tt>mksquashfs-lzma</tt>. It can be used to build the
+new file system as usual.
 
 	$ squashfs/squashfs-tools/mksquashfs-lzma squashfs-root D0000.new.squashfs -b 65536 -all-root -noappend -be
 
-After flashing the new image the router boots successfully. If we point our
+After flashing the new image the router boots successfully. If I point my
 browser to its configuration page (available at <tt>http://192.168.1.1</tt> by
-default) and login with the default credentials the we get the following
-webpage.
+default) and log in with the default credentials the following webpage appears.
 
 <figure>
 	<a href="/res/img/wf2419_hacking/pwned_success.png">
@@ -683,13 +707,14 @@ webpage.
 	<figcaption>Success! A pwned index.htm appears.</figcaption>
 </figure>
 
-Hurray! We can now do whatever we want with the root file system! To avoid
-manually entering a series of commands every time I want to build a new image,
-I created a small script available on GitHub [\[13\]][13].
+Hurray! This means that I can now do whatever I want with the root file system!
+To avoid manually entering a series of commands every time I want to build a
+new image, I created a small script available on GitHub [\[14\]][14].
 
 ## Compiling Software and More Roadblocks
 
-custom kernel? we need a working compiler
+custom kernel? I need a working compiler for the architecture
+(this looks impossible)
 
 buildroot
 
@@ -745,14 +770,17 @@ Still good training time to tackle something else (more to follow)
 \[9\] [GitHub - devttys0/sasquatch][9]
 [9]: https://github.com/devttys0/sasquatch
 
-\[10\] [squashfs - a compressed fs for Linux - Browse /squashfs at SourceForge.net][10]
-[10]: https://sourceforge.net/projects/squashfs/files/squashfs
+\[10\] [SquashFS - Wikipedia][10]
+[10]: https://en.wikipedia.org/wiki/SquashFS
 
-\[11\] [Official Squashfs LZMA][11]
-[11]: https://squashfs-lzma.org/
+\[11\] [Device file][11]
+[11]: https://en.wikipedia.org/wiki/Device_file
 
-\[12\] [Netis GPL Code][12]
-[12]: http://www.netis-systems.com/Suppory/gpl.html
+\[12\] [Official Squashfs LZMA][12]
+[12]: https://squashfs-lzma.org/
 
-\[13\] [mkimg.sh on GitHub][13]
-[13]: https://github.com/electricant/netis-wf2419-router-hacking/blob/master/firmware.extracted_new/mkimg.sh
+\[13\] [Netis GPL Code][13]
+[13]: http://www.netis-systems.com/Suppory/gpl.html
+
+\[14\] [mkimg.sh on GitHub][14]
+[14]: https://github.com/electricant/netis-wf2419-router-hacking/blob/master/firmware.extracted_new/mkimg.sh

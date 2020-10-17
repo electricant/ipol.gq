@@ -19,6 +19,8 @@ Firs off some useful guides:
 
 ## Boilerplate code
 
+### Presentation
+
 Now some boilerplate code for a presentation:
 
 	\documentclass[a4paper]{beamer}
@@ -49,13 +51,14 @@ Now some boilerplate code for a presentation:
 	\end{frame}
 	\end{document}
 
+### Article
+
 Also some code for an article:
 
 **NOTE:** This code requires the IEEEtran document class which can be downloaded
 from [here](http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/).
 On debian-based GNU/linux systems IEEEtran and some other useful packages can be
-installed with `sudo apt-get install texlive-publishers`. There ought to be
-something similar in other distros as well. Search your package manager.
+installed with: <tt>sudo apt-get install texlive-publishers</tt>.
 
 	\documentclass[journal, a4paper, 12pt]{IEEEtran}
 
@@ -79,7 +82,8 @@ something similar in other distros as well. Search your package manager.
 
 	\end{document}
 
-Refer to [http://www.texdoc.net/texmf-dist/doc/latex/IEEEtran/IEEEtran_HOWTO.pdf](http://www.texdoc.net/texmf-dist/doc/latex/IEEEtran/IEEEtran_HOWTO.pdf) for more details.
+Refer to [http://www.texdoc.net/texmf-dist/doc/latex/IEEEtran/IEEEtran_HOWTO.pdf](http://www.texdoc.net/texmf-dist/doc/latex/IEEEtran/IEEEtran_HOWTO.pdf) 
+for more details.
 
 ## Custom University of Padova Theme
 
@@ -96,5 +100,5 @@ same as the first one.
 Download the theme from
 [my github repo](https://github.com/electricant/beamerThemePadovaDEI) and
 install it or put the files in the same directory as your presentation. Then use
-it with `\usetheme\{PadovaDEI\}`.
+it with <tt>\usetheme\{PadovaDEI\}</tt>.
 

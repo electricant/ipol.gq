@@ -29,8 +29,8 @@ plenty of guides on the internet [\[1\]][1].
 
 Let's get straight into it. This is the setup I use for launching a server with
 three clients. Each machine is connected to the internet and to each other
-through a virtual layer 2 switch [\[2\]][2]. Please note that this script requires root
-privileges to be effective.
+through a virtual layer 2 switch [\[2\]][2]. Please note that this script
+requires root privileges to be effective.
 
 	#!/bin/bash
 
@@ -95,20 +95,20 @@ around the web.
 
 The first thing to note is that qemu requires a device instance for each
 declared netdev. To do so we have to add an id to each netdev
-(`-netdev id=netdev_id,netdev_type`) and then attach a device to it like so
-`-device hw_type,netdev=netdev_id`. As it can be seen this is done twice, the
-first time for the `tap` device and the second for an `user` device. Refer to
-the guide about qemu networking [\[3\]][3] for details about the role of each
-device.
+(<tt>-netdev id=netdev_id,netdev_type</tt>) and then attach a device to it like
+so <tt>-device hw_type,netdev=netdev_id</tt>. As it can be seen this is done
+twice, the first time for the <tt>tap</tt> device and the second for an
+<tt>user</tt> device. Refer to the guide about qemu networking [\[3\]][3] for
+details about the role of each device.
 
 Then in order to get the network topology we like we have to create and bridge
 together the tap interfaces at the host side. This has to be done before
 starting the various virtual machines. The commands have been taken from
 [\[4\]][4] and adapted a bit to the situation.
 
-Each virtual machine is started as a background job (note the `&` at the end)
-so before tearing down the network we issue a `wait` command which halts the
-script until all the jobs terminate.
+Each virtual machine is started as a background job (note the <tt>&</tt> at the
+end) so before tearing down the network we issue a <tt>wait</tt> command which
+halts the script until all the jobs terminate.
 
 ## References
 

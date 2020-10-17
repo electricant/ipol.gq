@@ -21,7 +21,7 @@ Whereas to enable it:
 `systemctl enable postgresql@9.4-main`
 
 If there is more than one version of the software installed that has to be run,
-then such version has to be specified after the `@` symbol.
+then such version has to be specified after the <tt>@</tt> symbol.
 
-For more details see [this mailing-list entry](http://www.postgresql.org/message-id/CAFyxdeSZh=Fv6nikh1_WqAtyKc0nmKTdTvj8-+JzYw-GobZnzw@mail.gmail.com) which
-states the problem but does not give a complete solution.
+For more details see [this mailing-list entry](http://www.postgresql.org/message-id/CAFyxdeSZh=Fv6nikh1_WqAtyKc0nmKTdTvj8-+JzYw-GobZnzw@mail.gmail.com)
+which states the problem but does not give a complete solution.

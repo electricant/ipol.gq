@@ -724,7 +724,7 @@ compiling stuff and endiannes
 
 stuck! illegal instruction
 
-	# busybox\_p
+	# busybox_p
 	Illegal instruction
 	# telnetd
 	Illegal instruction

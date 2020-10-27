@@ -167,6 +167,14 @@ after each link in order to provide some context about it.
 
 * [Economists Are Obsessed with “Job Creation.” How About Less Work?](http://evonomics.com/less-work-job-creation-peter-gray/)
 
+* [ZEVS, The russian 82 Hz ELF transmitter](http://www.vlf.it/zevs/zevs.htm)
+
+* [The Real Cuban Missile Crisis](https://www.theatlantic.com/magazine/archive/2013/01/the-real-cuban-missile-crisis/309190/?single_page=true)
+
+* [Aldous Huxley: The Ultimate Revolution](https://pulsemedia.org/2009/02/02/aldous-huxley-the-ultimate-revolution/)
+
+* [Why did men stop wearing high heels, anyway?](https://qz.com/409254/why-did-men-stop-wearing-high-heels-anyway/)
+
 ### Car and traffic related
 
 It seems as if I quite dislike the idea of being forced to own a car.
@@ -222,6 +230,15 @@ people general.
 	body?"*
 	<br/>Also related: [Urge Surfing mp3](https://depts.washington.edu/abrc/mbrp/recordings/Urge Surfing.mp3)
 
+* [Digital Camera Know-Hows](https://av.jpn.support.panasonic.com/support/global/cs/dsc/knowhow/index.html)
+	<br/>Albeit the tecnical information is dated this tutorial is still to
+	the point.
+
+* [How to win at monopoly and piss off ypur friends](https://kottke.org/16/02/how-to-win-at-monopoly-and-piss-off-your-friends)
+
+* [OpenBSD Jumpstart](https://openbsdjumpstart.org/)
+	<br/>Short presentation for first-time OpenBSD users
+
 * [Bipolar Translinear Circuits, lecture by Barrie
   Gilbert](https://www.youtube.com/watch?t=2066&v=LQNJVtcFrCc&app=desktop)
 
@@ -249,6 +266,8 @@ people general.
 * [Hostnames!](http://seriss.com/people/erco/unixtools/hostnames.html) <br>
 	A source of inspiration for computer hostnames
 
+* [Practical Makefiles, by example](http://nuclear.mutantstargoat.com/articles/make/)
+
 ### Programming
 
 * [A Road to Common Lisp / Steve Losh](http://stevelosh.com/blog/2018/08/a-road-to-common-lisp/)
@@ -270,12 +289,19 @@ people general.
 
 ## Short Stories and Essays
 
+* [Oliver Sacks, To See and Not to See (1993)](http://www.willamette.edu/~mstewart/whatdoesitmean2see.pdf)
+
 * [Howard Zinn, On Civil Disobedience (1970)](http://www.thirdworldtraveler.com/Zinn/CivilObedience_ZR.html)
 
 * [Isaac Asimov, The Feeling Of Power (1958)](https://urbigenous.net/library/power.html)
+
+* [Isaac Asimov, The Last Question (1956)](https://www.multivax.com/last_question.html)
+
+* [Isaac Asimov, The Last Answer (1980)](https://www.thrivenotes.com/the-last-answer/)
 
 * [Bertrand Russell, On Praise of Idleness (1932)](http://www.zpub.com/notes/idle.html)
 
 * [Ralph Waldo Emerson, Self-Reliance (1841)](http://www.101bananas.com/library2/emerson.html)
 
 * [E. M. Forster, The Other Side of the Hedge (1911)](http://www.101bananas.com/library2/otherside.html)
+

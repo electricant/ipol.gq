@@ -713,21 +713,55 @@ new image, I created a small script available on GitHub [\[14\]][14].
 
 ## Compiling Software and More Roadblocks
 
-custom kernel? I need a working compiler for the architecture
-(this looks impossible)
+This is getting long already. Let's recap the ultimate goal: compile a custom
+kernel for the device. To do so, I need a working compiler for the architecture.
+This process is streamlined by buildroot: *a set of Makefiles and patches that
+simplifies and automates the process of building a complete and bootable Linux
+environment for an embedded system* [\[15\]][15]. Buildroot downloads and builds
+the toolchain and utilities it needs for compiling software for the target
+architecture, applies custom patches to the sources, compiles the software and
+assembles the final bootable image. To test the compiler is working, for the
+time being I'm just interested in the cross-compiler toolchain and the final
+executables for the target.
 
-buildroot
+The first thing I did was to clone the latest stable buildroot release
+(2020.08.1 at the time of writing) with
+	
+	git clone git://git.buildroot.net/buildroot
+	cd buildroot
+	git checkout 2020.08.1
+
+Then, I tried to build a statically-linked busybox executable with some nice
+additions to the stock one on the router (such as telnet) using the stock
+<tt>Generic MIPS32</tt> target architecture variant for buildroot. The command I
+used are the following:
+
+	make menuconfig
+	/* select the desided architecture and build options */
+	make -j4
+	/* have a coffe break */
+
+After a few minutes, I found the compiled busybox executable in
+<tt>buildroot/output/target/bin</tt>. I copied it as <tt>busybox\_p</tt> (to 
+avoid confusion with the original executable) to the extracted firmware image
+and created a symlink to it named <tt>telnetd</tt>. I rebuilt the image as I did
+many times, flashed it and let the router boot. Sadly this was the result when
+running the new executable from the serial terminal.
+
+	# busybox_p
+	Illegal instruction
+	# telnetd
+	Illegal instruction
+
+According to the chipset datasheet [\[4\]][4],
+
+(this looks impossible)
 
 patches
 
 compiling stuff and endiannes
 
 stuck! illegal instruction
-
-	# busybox_p
-	Illegal instruction
-	# telnetd
-	Illegal instruction
 
 flip table and go working to something else
 
@@ -784,3 +818,7 @@ Still good training time to tackle something else (more to follow)
 
 \[14\] [mkimg.sh on GitHub][14]
 [14]: https://github.com/electricant/netis-wf2419-router-hacking/blob/master/firmware.extracted_new/mkimg.sh
+
+\[15\] [Buildroot - Wikipedia][15]
+[15]: https://en.wikipedia.org/wiki/Buildroot
+

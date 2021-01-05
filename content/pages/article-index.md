@@ -1,5 +1,9 @@
 # Articles by Date
 
+### January 2021
+
+* [A Note About Btrfs RAID1 for my Future Self](/articles/note_btrfs_raid1.html)
+
 ### August 2020
 
 * [Netis WF2419I Hacking](/articles/netis_WF2419I_hacking.html)

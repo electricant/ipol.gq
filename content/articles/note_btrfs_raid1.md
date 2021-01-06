@@ -44,6 +44,10 @@ And while I'm at it why not throw a few runs of
 as a new drive burn-in ritual [\[3\]][3] before formatting and adding the drive
 to the pool?
 
+After that I have to buy a new hard drive to have a spare when needed. It is
+worth having a look at [r/DataHoarder wiki](https://www.reddit.com/r/datahoarder/wiki/index)
+for some tips.
+
 ## References
 
 \[1\] [Using Btrfs with Multiple Devices][1]

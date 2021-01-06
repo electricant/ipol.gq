@@ -37,16 +37,17 @@ To remove the failed disk:
 This command removes the selected disk and automatically rebalances the data
 within the remaining hard drives.
 
-And while I'm at it why not throw a few runs of
+And while I'm at it why not throw in a run of
 
 	# badblocks -b 4096 -e 1 -wsv /dev/sdX
 
 as a new drive burn-in ritual [\[3\]][3] before formatting and adding the drive
 to the pool?
 
-After that I have to buy a new hard drive to have a spare when needed. It is
-worth having a look at [r/DataHoarder wiki](https://www.reddit.com/r/datahoarder/wiki/index)
-for some tips.
+After going through all the steps above the array is ready. However, I have to
+buy a new hard drive to have a spare when needed. It is worth having a look at 
+[r/DataHoarder wiki](https://www.reddit.com/r/datahoarder/wiki/index) for some
+tips.
 
 ## References
 

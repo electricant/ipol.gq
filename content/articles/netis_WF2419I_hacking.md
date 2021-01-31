@@ -727,18 +727,30 @@ executables for the target.
 The first thing I did was to clone the latest stable buildroot release
 (2020.08.1 at the time of writing) with
 	
-	git clone git://git.buildroot.net/buildroot
-	cd buildroot
-	git checkout 2020.08.1
+	$ git clone git://git.buildroot.net/buildroot
+	$ cd buildroot
+	$ git checkout 2020.08.1
 
 Then, I tried to build a statically-linked busybox executable with some nice
-additions to the stock one on the router (such as telnet) using the stock
+additions to the stock one on the router (such as telnet) using
+<tt>MIPS (big endian)</tt> as the target architecture and the stock
 <tt>Generic MIPS32</tt> target architecture variant for buildroot. The command I
 used are the following:
 
-	make menuconfig
-	/* select the desided architecture and build options */
-	make -j4
+	$ make menuconfig
+	/* select the desided architecture and build options
+	   Especially:
+		Target options -> Target Architecture -> MIPS (big endian)
+		               -> Target Architecture Variant -> Generic MIPS32
+		Build options -> libraries -> static only
+	*/
+
+	$ make busybox-menuconfig
+	/* Enable telnetd and disable all the stuff we don't need to make the
+	   busybox executable small
+	*/
+	
+	$ make
 	/* have a coffe break */
 
 After a few minutes, I found the compiled busybox executable in
@@ -753,27 +765,89 @@ running the new executable from the serial terminal.
 	# telnetd
 	Illegal instruction
 
-According to the chipset datasheet [\[4\]][4],
+Why can't this stuff just work? Maybe the endianness of the executable is wrong,
+all in all I just guessed it. In the extracted firmware image directory on my PC
+I ran:
 
-(this looks impossible)
+	$ file busybox
+	busybox: ELF 32-bit MSB executable, MIPS, MIPS-I version 1 (SYSV), dynamically linked, interpreter /lib/ld-uClibc.so.0, stripped
+	$ file busybox_p
+	busybox_p: ELF 32-bit MSB executable, MIPS, MIPS-I version 1 (SYSV), statically linked, stripped
 
-patches
+So the endianness is correct. However, according to the chipset
+datasheet&#8239;[\[4\]][4], the illegal instruction the device is encountering
+is due to the core which is a RLX4181 Lexra architecture&#8239;[\[16\]][16], a
+variant of the MIPS32 architecture lacking the <tt>lwl, lwr, swl</tt> and
+<tt>swr</tt> instructions, covered by an US patent.
 
-compiling stuff and endiannes
+Time to dig into the search engine once again. The following links seem to point
+to some useful code:
+* [hackpascal/0001-binutils-2.24-add-lexra-support.patch](https://gist.github.com/hackpascal/c07dd5e3745f90b45e5ed6c1e86fde41)
+* [Working Realtek SoC RTL8196E 97D 97F in last master - For Developers - OpenWrt Forum](https://forum.openwrt.org/t/working-realtek-soc-rtl8196e-97d-97f-in-last-master/70975)
+* [rlx-router/openwrt-rtl8196c](https://github.com/rlx-router/openwrt-rtl8196c)
+* [rlx-router/linux-rlx-upstream](https://github.com/rlx-router/linux-rlx-upstream)
+* [shibajee/buildroot-rlx4181](https://github.com/shibajee/buildroot-rlx4181)
 
-stuck! illegal instruction
+The last link contains a complete buildroot repository allegedly supporting the
+RLX4181 architecture. I added it to my buildroot folder, cleaned it and rebuilt
+it once again:
 
-flip table and go working to something else
+	git remote add https://notabug.org/shibajee/buildroot
+	git remote add -f rlx4181-notabug https://notabug.org/shibajee/buildroot
+	git checkout rlx4181-master
+	make clean
+	git status
+	cp config-rlx4181 .config
+	make menuconfig
+	make -j4
+	
+After a while the executable files are ready. Running <tt>objdump -D<tt> on the
+output executables, grepping for the instructions which are not accepted
+by the processor did not turn any result.
+	
+	objdump -D root/bin/busybox_p | grep lwl
+	objdump -D root/bin/busybox_p | grep lwr
+	objdump -D root/bin/busybox_p | grep swl
+	objdump -D root/bin/busybox_p | grep swr
+
+Now I was really confident that this time everything will work as expected so I
+rebuilt the flash image and flashed onto the chip. Sadly I was greeted again by
+the darn <tt>Illegal instruction</tt> message.
+
+I'm starting to suspect that the error may be due to the wrong kernel headers 
+version. The correct kernel header files are available in the GPL code package.
+I issued:
+
+	make uclibc-menuconfig
+
+To edit the uclibc .config file and set a different directory to fetch the
+kernel headers.
+
+Pointing uclibc to the original (and quite old) kernel headers did not work.
+Now I am unable successfully compile buildroot because I get a bunch of 
+undeclared identifiers in many libraries. This is probably due to the kernel
+headers lacking the symbols required by the new software I'm compiling.
 
 ## Conclusion
 
-Apply patchset manually ?
+This is too much for me. I'm calling it quits here. Porting newer software to
+the older kernel headers is too much for me. One option could be to port a newer
+kernel to the device, but all the kernel source available on github seem to
+compile successfully but do not boot properly.
 
-Use a different buildroot version ?
+Another option could be to use an older buildroot version. However I have no
+idea if there is any buildroot version compatible with the Linux kernel version
+2.4. Moreover I will have to manually port the binutils patches to correctly
+compile software for this unorthodox MIPS architecture.
 
-Is it worth it ? No
-
-Still good training time to tackle something else (more to follow)
+I think the effort required to make progress on this project is too much and it 
+is not worth it any more. Some progress has already been made by the OpenWrt
+folks albeit on a different processor revision (see links in the previous
+section) so I may reboot this project in the future. I learned a lot already and
+no electronic devices were harmed in the process. So, even though I hit only 3
+out of the 5 objectives I set at the start, I'm quite satisfied. It was still a
+valid learning experience. It's time to try to hack another router, maybe I will
+be luckier this time (stay tuned).
 
 ## References
 
@@ -821,4 +895,7 @@ Still good training time to tackle something else (more to follow)
 
 \[15\] [Buildroot - Wikipedia][15]
 [15]: https://en.wikipedia.org/wiki/Buildroot
+
+\[16\] [Lexra - LinuxMIPS][16]
+[16]: https://www.linux-mips.org/wiki/Lexra
 

@@ -801,7 +801,7 @@ it once again:
 	make menuconfig
 	make -j4
 	
-After a while the executable files are ready. Running <tt>objdump -D<tt> on the
+After a while the executable files are ready. Running <tt>objdump -D</tt> on the
 output executables, grepping for the instructions which are not accepted
 by the processor did not turn any result.
 	

@@ -20,7 +20,5 @@ I love creating stuff and I like to describe myself as a craftsman.
 
 My motto is: *"If you want a job well done you have to do it yourself"*.
 
-## More
-
- * e-mail: [contactme@ipol.gq](mailto:contactme@ipol.gq)
- * [github](https://github.com/electricant)
+Want to know more about my latest endeavours? Have a look on
+[my github](https://github.com/electricant).

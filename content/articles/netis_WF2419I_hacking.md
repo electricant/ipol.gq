@@ -664,7 +664,7 @@ system as root to get the whole contents of the image:
 	created 23 devices
 	created 0 fifos
 
-Now we are talking! Well... not really. I rebuildt the file system once again
+Now we are talking! Well... not really. I rebuilt the file system once again
 as I did before, the only difference now is file system size. However, the
 router is still stuck in a bootloop. A quick check confirmed that the size of 
 the final flash image fits in the flash chip, so the file system size was not 
@@ -706,12 +706,9 @@ SquashFS 2.2-r2.
 	 #include <fcntl.h>
 	 #include <errno.h>
 
-After that, I compiled the sources with
-
-make
-
-and I got a fancy new executable to play with: __mksquashfs-lzma__. It can be
-used to build the new file system as usual.
+After that, I compiled the sources with <tt>make</tt> and I got a fancy new 
+executable to play with: __mksquashfs-lzma__. It can be used to build the new
+file system as usual.
 
 	$ squashfs/squashfs-tools/mksquashfs-lzma squashfs-root D0000.new.squashfs -b 65536 -all-root -noappend -be
 
@@ -757,7 +754,8 @@ __Generic MIPS32__ target architecture variant for buildroot. The command I
 used are the following:
 
 	$ make menuconfig
-	/* select the desided architecture and build options
+	/* 
+	   Select the desided architecture and build options
 	   Especially:
 		Target options -> Target Architecture -> MIPS (big endian)
 		               -> Target Architecture Variant -> Generic MIPS32
@@ -765,7 +763,8 @@ used are the following:
 	*/
 
 	$ make busybox-menuconfig
-	/* Enable telnetd and disable all the stuff we don't need to make the
+	/* 
+	   Enable telnetd and disable all the stuff we don't need to make the
 	   busybox executable small
 	*/
 	
